@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
 import logoSrc from '../../assets/logo/logo.png'
-import './Navbar.css'
 
 const navItems = [
   { label: 'Home', href: '#' },
@@ -34,103 +33,167 @@ export default function Navbar() {
     <>
       <nav
         id="main-navbar"
-        className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}
+        className={`fixed top-0 left-0 right-0 z-[1000] px-6 transition-all duration-[400ms] ease-smooth ${
+          scrolled ? 'pt-2' : 'pt-4'
+        }`}
       >
-        <div className="navbar__inner">
+        <div
+          className={`mx-auto flex h-20 max-w-[1280px] items-center justify-between gap-4 rounded-full px-7 border backdrop-blur-[20px] backdrop-saturate-[1.3] transition-all duration-[400ms] ease-smooth ${
+            scrolled
+              ? 'bg-[rgba(8,8,8,0.82)] border-[rgba(247,209,90,0.15)] shadow-[0_8px_40px_rgba(0,0,0,0.5),0_0_60px_rgba(247,209,90,0.06),inset_0_1px_0_rgba(255,255,255,0.06)]'
+              : 'bg-[rgba(8,8,8,0.55)] border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.06)]'
+          }`}
+        >
           {/* ── Logo ── */}
-          <a href="#" className="navbar__logo" id="navbar-logo" aria-label="ABC Creations Home">
+          <a
+            href="#"
+            className="flex shrink-0 items-center gap-3 no-underline transition-transform duration-300 ease-in-out hover:scale-[1.04]"
+            id="navbar-logo"
+            aria-label="ABC Creations Home"
+          >
             <img
               src={logoSrc}
               alt="ABC Creations logo"
-              className="navbar__logo-img"
+              className="h-11 w-11 object-contain drop-shadow-[0_0_12px_rgba(247,209,90,0.3)] hover:drop-shadow-[0_0_18px_rgba(247,209,90,0.55)] transition-[filter] duration-300"
               width={48}
               height={48}
             />
-            <span className="navbar__logo-text">
-              <span className="navbar__logo-name">ABC</span>
-              <span className="navbar__logo-sub">Creations</span>
+            <span className="flex flex-col leading-tight">
+              <span className="text-xl font-black tracking-[0.08em] bg-gradient-to-br from-gold-light to-gold-dark bg-clip-text text-transparent">
+                ABC
+              </span>
+              <span className="text-[0.6rem] font-semibold tracking-[0.32em] uppercase text-[rgba(244,241,232,0.55)]">
+                Creations
+              </span>
             </span>
           </a>
 
           {/* ── Desktop nav links ── */}
-          <ul className="navbar__links" role="menubar">
+          <ul className="hidden lg:flex items-center gap-1 list-none m-0 p-0" role="menubar">
             {navItems.map((item) => (
               <li key={item.label} role="none">
                 <a
                   href={item.href}
                   role="menuitem"
                   id={`nav-${item.label.toLowerCase()}`}
-                  className={`navbar__link ${activeItem === item.label ? 'navbar__link--active' : ''}`}
+                  className={`navbar-link-underline relative inline-flex items-center px-[18px] py-2 text-[0.8rem] font-semibold tracking-[0.14em] uppercase no-underline rounded-full overflow-hidden transition-colors duration-300 ${
+                    activeItem === item.label
+                      ? 'text-gold navbar-link-underline--active'
+                      : 'text-[rgba(244,241,232,0.7)] hover:text-gold hover:bg-[rgba(247,209,90,0.06)]'
+                  }`}
                   onClick={() => setActiveItem(item.label)}
                 >
                   {item.label}
-                  <span className="navbar__link-glow" aria-hidden="true" />
+                  <span className="navbar-link-glow" aria-hidden="true" />
                 </a>
               </li>
             ))}
           </ul>
 
           {/* ── CTA button ── */}
-          <a href="#contact" className="navbar__cta" id="navbar-cta">
-            <span className="navbar__cta-shine" aria-hidden="true" />
+          <a
+            href="#contact"
+            className="hidden lg:inline-flex relative items-center shrink-0 px-6 py-2.5 text-[0.78rem] font-bold tracking-[0.12em] uppercase text-brand-surface no-underline rounded-full bg-gradient-to-br from-gold-light via-gold to-gold-dark bg-[length:200%_200%] overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(247,209,90,0.35),0_0_60px_rgba(247,209,90,0.12)] animate-cta-shimmer"
+            id="navbar-cta"
+          >
+            <span className="navbar-cta-shine" aria-hidden="true" />
             Book a Call
           </a>
 
           {/* ── Mobile hamburger ── */}
           <button
-            className={`navbar__burger ${mobileOpen ? 'navbar__burger--open' : ''}`}
+            className={`burger-line-parent flex lg:hidden flex-col justify-center items-center gap-[5px] w-11 h-11 p-0 border border-white/10 rounded-xl bg-white/[0.04] cursor-pointer shrink-0 transition-colors duration-300 hover:bg-[rgba(247,209,90,0.08)] hover:border-[rgba(247,209,90,0.2)] ${
+              mobileOpen ? 'burger-open' : ''
+            }`}
             id="navbar-burger"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((o) => !o)}
           >
-            <span className="navbar__burger-line" />
-            <span className="navbar__burger-line" />
-            <span className="navbar__burger-line" />
+            <span className="burger-line bg-gold" />
+            <span className="burger-line bg-gold" />
+            <span className="burger-line bg-gold" />
           </button>
         </div>
       </nav>
 
       {/* ── Mobile overlay ── */}
       <div
-        className={`navbar-mobile ${mobileOpen ? 'navbar-mobile--open' : ''}`}
+        className={`fixed inset-0 z-[999] ${
+          mobileOpen ? 'pointer-events-auto visible' : 'pointer-events-none invisible'
+        }`}
         id="mobile-menu"
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
       >
-        <div className="navbar-mobile__backdrop" onClick={() => setMobileOpen(false)} />
-        <div className="navbar-mobile__panel">
-          <div className="navbar-mobile__logo">
-            <img src={logoSrc} alt="ABC Creations" width={56} height={56} />
-            <span className="navbar__logo-text">
-              <span className="navbar__logo-name">ABC</span>
-              <span className="navbar__logo-sub">Creations</span>
+        {/* Backdrop */}
+        <div
+          className={`absolute inset-0 bg-black/70 backdrop-blur-[6px] mobile-backdrop ${
+            mobileOpen ? 'mobile-backdrop-open' : ''
+          }`}
+          onClick={() => setMobileOpen(false)}
+        />
+
+        {/* Panel */}
+        <div
+          className={`mobile-panel absolute top-0 right-0 w-[min(380px,85vw)] h-full flex flex-col p-8 px-7 bg-gradient-to-b from-[rgba(12,12,12,0.97)] to-[rgba(8,8,8,0.99)] border-l border-[rgba(247,209,90,0.1)] shadow-[-10px_0_60px_rgba(0,0,0,0.5)] ${
+            mobileOpen ? 'mobile-panel-open' : ''
+          }`}
+        >
+          {/* Mobile logo */}
+          <div className="flex items-center gap-3.5 mb-12 pb-7 border-b border-white/[0.06]">
+            <img
+              src={logoSrc}
+              alt="ABC Creations"
+              className="w-[52px] h-[52px] object-contain drop-shadow-[0_0_12px_rgba(247,209,90,0.3)]"
+              width={56}
+              height={56}
+            />
+            <span className="flex flex-col leading-tight">
+              <span className="text-xl font-black tracking-[0.08em] bg-gradient-to-br from-gold-light to-gold-dark bg-clip-text text-transparent">
+                ABC
+              </span>
+              <span className="text-[0.6rem] font-semibold tracking-[0.32em] uppercase text-[rgba(244,241,232,0.55)]">
+                Creations
+              </span>
             </span>
           </div>
 
-          <ul className="navbar-mobile__links">
+          {/* Mobile links */}
+          <ul className={`list-none m-0 p-0 flex flex-col gap-1.5 flex-1 ${mobileOpen ? 'mobile-links-open' : ''}`}>
             {navItems.map((item, i) => (
-              <li key={item.label} style={{ transitionDelay: `${80 + i * 50}ms` }}>
+              <li
+                key={item.label}
+                className="mobile-link-item"
+                style={{ transitionDelay: `${80 + i * 50}ms` }}
+              >
                 <a
                   href={item.href}
                   id={`mobile-nav-${item.label.toLowerCase()}`}
-                  className={`navbar-mobile__link ${activeItem === item.label ? 'navbar-mobile__link--active' : ''}`}
+                  className={`flex items-center gap-4 px-[18px] py-3.5 text-base font-semibold tracking-[0.1em] uppercase no-underline rounded-2xl transition-colors duration-300 ${
+                    activeItem === item.label
+                      ? 'text-gold bg-[rgba(247,209,90,0.06)]'
+                      : 'text-[rgba(244,241,232,0.65)] hover:text-gold hover:bg-[rgba(247,209,90,0.06)]'
+                  }`}
                   onClick={() => {
                     setActiveItem(item.label)
                     setMobileOpen(false)
                   }}
                 >
-                  <span className="navbar-mobile__link-index">0{i + 1}</span>
+                  <span className="text-[0.7rem] font-normal tracking-normal text-[rgba(247,209,90,0.35)] tabular-nums">
+                    0{i + 1}
+                  </span>
                   {item.label}
                 </a>
               </li>
             ))}
           </ul>
 
+          {/* Mobile CTA */}
           <a
             href="#contact"
-            className="navbar-mobile__cta"
+            className="flex items-center justify-center p-4 mt-auto text-[0.85rem] font-bold tracking-[0.14em] uppercase text-brand-surface no-underline rounded-[18px] bg-gradient-to-br from-gold-light via-gold to-gold-dark transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(247,209,90,0.3)]"
             id="mobile-navbar-cta"
             onClick={() => setMobileOpen(false)}
           >

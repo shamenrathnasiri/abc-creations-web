@@ -1,35 +1,150 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  font-family: 'Segoe UI', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.87);
-  background: #020202;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  :root {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.87);
+    background: #020202;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: #020202;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top, rgba(247, 209, 90, 0.12), transparent 30%),
+      #020202;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  a {
+    text-decoration: none;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-  background: #020202;
-}
+/* ── Navbar custom components & utilities ── */
+@layer components {
+  /* CTA shine sweep overlay */
+  .navbar-cta-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    animation: shine 4s ease-in-out infinite;
+  }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at top, rgba(247, 209, 90, 0.12), transparent 30%),
-    #020202;
-}
+  /* Nav link underline */
+  .navbar-link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ffe894, #f2b819);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
-#root {
-  min-height: 100vh;
-}
+  .navbar-link-underline:hover::after,
+  .navbar-link-underline--active::after {
+    width: 50%;
+  }
 
-a {
-  text-decoration: none;
+  /* Glow blob on nav link hover */
+  .navbar-link-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(247, 209, 90, 0.15), transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+
+  .navbar-link-underline:hover .navbar-link-glow {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* Hamburger line morphing */
+  .burger-line {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.25s ease,
+      width 0.35s ease;
+  }
+
+  .burger-open .burger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .burger-open .burger-line:nth-child(2) {
+    opacity: 0;
+    width: 0;
+  }
+
+  .burger-open .burger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile panel slide-in */
+  .mobile-panel {
+    transform: translateX(100%);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mobile-panel-open {
+    transform: translateX(0);
+  }
+
+  /* Mobile backdrop */
+  .mobile-backdrop {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .mobile-backdrop-open {
+    opacity: 1;
+  }
+
+  /* Mobile links stagger entrance */
+  .mobile-link-item {
+    opacity: 0;
+    transform: translateX(24px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mobile-links-open .mobile-link-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
