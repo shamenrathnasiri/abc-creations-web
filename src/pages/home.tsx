@@ -4,7 +4,7 @@ export default function Home() {
 	return (
 		<section
 			id="home"
-			className="relative flex min-h-[calc(100vh-72px)] scroll-mt-20 flex-col overflow-hidden"
+			className="relative flex min-h-[calc(100vh-72px)] scroll mt-20 flex-col overflow-hidden"
 		>
 			{/* ── Full-bleed background image ── */}
 			<div className="absolute inset-0">
@@ -42,28 +42,18 @@ export default function Home() {
 
 								{/* Headline — large, clear, with shadow for readability */}
 								<h1
-									className="font-black uppercase leading-[0.92] tracking-[-0.02em] text-white"
-									style={{
-										fontSize: 'clamp(3.2rem,7.5vw,6rem)',
-										textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 4px 40px rgba(0,0,0,0.5)',
-									}}
-								>
-									Bold Ideas,{' '}
-									<span
-										className="block"
-										style={{
-											background: 'linear-gradient(90deg,#f7931a,#ffd700,#ffe87a)',
-											WebkitBackgroundClip: 'text',
-											WebkitTextFillColor: 'transparent',
-											backgroundClip: 'text',
-											filter: 'drop-shadow(0 2px 8px rgba(247,147,26,0.5))',
-										}}
-									>
-										Beautifully
-									</span>
-									Made.
-								</h1>
+											className="text-[clamp(2.6rem,5vw,4.8rem)] font-black uppercase leading-[0.92] tracking-[-0.02em] text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.7)] drop-shadow-[0_4px_36px_rgba(0,0,0,0.5)]"
+										>
+											Bold Ideas,{' '}
+											<span className="block bg-gradient-to-r from-[#f7931a] via-[#ffd700] to-[#ffe87a] bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(247,147,26,0.5)]">
+												Beautifully
+											</span>
+											Made.
+										</h1>
 
+										<p className="mt-4 text-[0.8rem] font-bold uppercase tracking-[0.28em] text-[#f5d98a] md:text-[0.9rem]">
+											IDEAS TO MEET TECHNOLOGY.
+										</p>
 								{/* Sub-text */}
 								<p
 									className="mt-7 max-w-lg text-[1rem] leading-[1.8] text-white/80"
@@ -100,67 +90,7 @@ export default function Home() {
 								</div>
 							</div>
 
-							{/* RIGHT: vertical service pills */}
-							<div className="hidden lg:flex lg:flex-col lg:items-end lg:gap-2.5">
-								{[
-									{
-										icon: (
-											<svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-												<path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-											</svg>
-										),
-										label: 'Web Development',
-									},
-									{
-										icon: (
-											<svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-												<path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-											</svg>
-										),
-										label: 'Graphic Design',
-									},
-									{
-										icon: (
-											<svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-												<path strokeLinecap="round" strokeLinejoin="round" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
-											</svg>
-										),
-										label: 'UI/UX Design',
-									},
-									{
-										icon: (
-											<svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-												<path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-											</svg>
-										),
-										label: 'Branding',
-									},
-									{
-										icon: (
-											<svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-												<path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-											</svg>
-										),
-										label: 'Digital Solutions',
-									},
-								].map((item) => (
-									<div
-										key={item.label}
-										className="hero-service-pill group flex items-center gap-2.5 rounded-full px-4 py-2 backdrop-blur-md transition-all duration-300"
-										style={{
-											background: 'rgba(8,12,28,0.70)',
-											border: '1px solid rgba(255,255,255,0.12)',
-										}}
-									>
-										<span
-											className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110"
-											style={{ background: 'linear-gradient(135deg,#f7931a,#ffd700)', color: '#111' }}
-										>
-											{item.icon}
-										</span>
-										<span className="text-[0.75rem] font-semibold text-white/85 group-hover:text-white">{item.label}</span>
-									</div>
-								))}
+							
 							</div>
 						</div>
 					</div>
@@ -249,8 +179,7 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
-			</div>
-
+		
 			{/* ── CSS ── */}
 			<style>{`
 				.hero-service-pill:hover {
