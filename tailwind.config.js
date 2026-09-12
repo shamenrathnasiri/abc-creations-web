@@ -12,6 +12,9 @@ export default {
         brand: {
           bg: '#020202',
           surface: '#0a0a0a',
+          orange: '#f7931a',
+          yellow: '#ffd700',
+          cream: '#ffe87a',
         },
       },
       fontFamily: {

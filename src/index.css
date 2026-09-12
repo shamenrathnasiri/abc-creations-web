@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ══════════════════════════════════════════════════════
+   LOGO BRAND GRADIENT — extracted from the AC logo mark
+   Orange  #f7931a  →  Gold  #ffd700  →  Cream  #ffe87a
+   ══════════════════════════════════════════════════════ */
+:root {
+  --logo-orange: #f7931a;
+  --logo-gold:   #ffd700;
+  --logo-cream:  #ffe87a;
+
+  /* Horizontal (left→right) */
+  --grad-logo-h:   linear-gradient(90deg,  var(--logo-orange), var(--logo-gold), var(--logo-cream));
+  /* Diagonal (bottom-left → top-right) — mirrors the logo's own sweep */
+  --grad-logo-d:   linear-gradient(135deg, var(--logo-orange), var(--logo-gold), var(--logo-cream));
+  /* Vertical (bottom → top) */
+  --grad-logo-v:   linear-gradient(0deg,   var(--logo-orange), var(--logo-gold), var(--logo-cream));
+  /* Radial glow */
+  --glow-logo:     radial-gradient(ellipse at center, rgba(247,209,90,0.18) 0%, rgba(247,147,26,0.10) 40%, transparent 70%);
+}
+
 @layer base {
   :root {
     font-family: 'Segoe UI', sans-serif;
@@ -38,8 +57,147 @@
   }
 }
 
+/* ══════════════════════════════════════════════════════
+   LOGO GRADIENT — Reusable brand classes
+   ══════════════════════════════════════════════════════ */
+@layer components {
+
+  /* ── Gradient text (matches logo diagonal sweep) ── */
+  .logo-grad-text {
+    background: var(--grad-logo-d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ── Solid gradient background ── */
+  .logo-grad-bg {
+    background: var(--grad-logo-d);
+  }
+
+  /* ── Horizontal gradient underline / divider ── */
+  .logo-grad-line {
+    background: var(--grad-logo-h);
+  }
+
+  /* ── Glowing gradient border via outline trick ── */
+  .logo-grad-border {
+    position: relative;
+  }
+  .logo-grad-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: var(--grad-logo-d);
+    z-index: -1;
+    opacity: 0.35;
+    transition: opacity 0.4s ease;
+  }
+  .logo-grad-border:hover::before {
+    opacity: 0.7;
+  }
+
+  /* ── Section gradient band (diagonal stripe across a section) ── */
+  .logo-grad-band {
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-grad-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(247, 147, 26, 0.08) 0%,
+      rgba(255, 215, 0,  0.05) 40%,
+      rgba(255, 232, 122, 0.03) 70%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ── Animated sweeping shimmer across section header ── */
+  .logo-grad-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-grad-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      110deg,
+      transparent,
+      rgba(255, 215, 0, 0.18) 40%,
+      rgba(255, 232, 122, 0.28) 50%,
+      rgba(255, 215, 0, 0.18) 60%,
+      transparent
+    );
+    animation: logoGradSweep 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* ── Radial glow orb behind a section ── */
+  .logo-grad-orb {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(247, 147, 26, 0.12) 0%,
+      rgba(255, 215, 0,  0.08) 35%,
+      transparent 70%
+    );
+    pointer-events: none;
+    animation: logoOrbPulse 6s ease-in-out infinite;
+  }
+
+  /* ── Pill / tag with gradient border ── */
+  .logo-tag {
+    display: inline-block;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    background:
+      linear-gradient(#020202, #020202) padding-box,
+      var(--grad-logo-d) border-box;
+    color: var(--logo-gold);
+  }
+
+  /* ── CTA button with logo gradient fill ── */
+  .logo-cta-btn {
+    background: var(--grad-logo-d);
+    color: #111111;
+    font-weight: 700;
+    transition: filter 0.25s ease, transform 0.25s ease;
+  }
+  .logo-cta-btn:hover {
+    filter: brightness(1.1) saturate(1.15);
+    transform: translateY(-2px);
+  }
+
+  /* ── Keyframes ── */
+  @keyframes logoGradSweep {
+    0%, 100% { left: -80%; }
+    50%       { left: 140%; }
+  }
+
+  @keyframes logoOrbPulse {
+    0%, 100% { transform: scale(1);    opacity: 0.7; }
+    50%       { transform: scale(1.12); opacity: 1;   }
+  }
+
+  @keyframes logoGradIn {
+    from { opacity: 0; transform: scaleX(0); }
+    to   { opacity: 1; transform: scaleX(1); }
+  }
+}
+
 /* ── Navbar custom components & utilities ── */
 @layer components {
+
   /* ─── Scroll-state motion for the floating navbar ─── */
   .navbar-frame-scrolled {
     animation: navbarSettle 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -343,6 +501,109 @@
     .navbar-scrolled-glow::before,
     .navbar-scrolled-glow::after,
     .navbar-logo-scrolled {
+      animation: none;
+    }
+  }
+
+  /* ── About page animations ── */
+
+  /* Floating orbs */
+  .about-float-orb {
+    animation: aboutFloatOrb 8s ease-in-out infinite;
+  }
+
+  .about-float-orb-reverse {
+    animation: aboutFloatOrb 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes aboutFloatOrb {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -20px) scale(1.05); }
+    66% { transform: translate(-20px, 15px) scale(0.95); }
+  }
+
+  /* Logo float */
+  .about-logo-float {
+    animation: aboutLogoFloat 4s ease-in-out infinite;
+  }
+
+  @keyframes aboutLogoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Logo ring rotation */
+  .about-logo-ring {
+    animation: aboutRingSpin 20s linear infinite;
+  }
+
+  @keyframes aboutRingSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Logo pulse ring */
+  .about-logo-pulse {
+    animation: aboutPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes aboutPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.06); opacity: 1; }
+  }
+
+  /* Orbiting dots */
+  .about-orbit {
+    animation: aboutOrbit 8s linear infinite;
+  }
+
+  .about-orbit-reverse {
+    animation: aboutOrbit 12s linear infinite reverse;
+  }
+
+  @keyframes aboutOrbit {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Shimmer line across value strip */
+  .about-shimmer-line {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(247, 209, 90, 0.4) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: aboutShimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes aboutShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Label glow */
+  .about-label-glow {
+    animation: aboutLabelGlow 2.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes aboutLabelGlow {
+    0% { box-shadow: 0 0 8px rgba(247, 209, 90, 0.05); }
+    100% { box-shadow: 0 0 20px rgba(247, 209, 90, 0.12); }
+  }
+
+  /* Reduced motion for about section */
+  @media (prefers-reduced-motion: reduce) {
+    .about-float-orb,
+    .about-float-orb-reverse,
+    .about-logo-float,
+    .about-logo-ring,
+    .about-logo-pulse,
+    .about-orbit,
+    .about-orbit-reverse,
+    .about-shimmer-line,
+    .about-label-glow {
       animation: none;
     }
   }
