@@ -23,7 +23,7 @@
 
 @layer base {
   :root {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
     line-height: 1.5;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.87);
@@ -609,3 +609,17 @@
   }
 }
 
+
+/* -- TYPOGRAPHY — Plus Jakarta Sans heading system -- */
+h1, h2, h3, h4 {
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.font-heading {
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif !important;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
