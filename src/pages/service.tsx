@@ -27,12 +27,84 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 	return <span ref={ref}>{count}{suffix}</span>
 }
 
+function SkillBar({ label, percent, delay = 0 }: { label: string; percent: number; delay?: number }) {
+	const [width, setWidth] = useState(0)
+	const [countVal, setCountVal] = useState(0)
+	const ref = useRef<HTMLDivElement>(null)
+	const started = useRef(false)
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting && !started.current) {
+					started.current = true
+					setTimeout(() => {
+						const steps = 60
+						const duration = 1400
+						const increment = percent / steps
+						let current = 0
+						const timer = setInterval(() => {
+							current += increment
+							if (current >= percent) {
+								setWidth(percent)
+								setCountVal(percent)
+								clearInterval(timer)
+							} else {
+								setWidth(current)
+								setCountVal(Math.floor(current))
+							}
+						}, duration / steps)
+					}, delay)
+				}
+			},
+			{ threshold: 0.3 }
+		)
+		if (ref.current) observer.observe(ref.current)
+		return () => observer.disconnect()
+	}, [percent, delay])
+	return (
+		<div ref={ref} className="group">
+			<div className="mb-2 flex items-center justify-between">
+				<span className="text-sm font-semibold text-white/80 tracking-wide">{label}</span>
+				<span
+					className="text-sm font-black tabular-nums logo-grad-text"
+					style={{ minWidth: '2.8rem', textAlign: 'right' }}
+				>
+					{countVal}%
+				</span>
+			</div>
+			{/* Track */}
+			<div
+				className="relative h-[6px] w-full overflow-hidden rounded-full"
+				style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.04)' }}
+			>
+				{/* Fill */}
+				<div
+					className="absolute left-0 top-0 h-full rounded-full transition-[width] duration-75"
+					style={{
+						width: `${width}%`,
+						background: 'linear-gradient(90deg, #f7931a 0%, #ffd700 60%, #ffe87a 100%)',
+						boxShadow: '0 0 8px rgba(247,147,26,0.5)',
+					}}
+				/>
+				{/* Shimmer overlay */}
+				<div
+					className="pointer-events-none absolute inset-0 opacity-30"
+					style={{
+						background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)',
+						animation: 'shimmer 2.2s infinite',
+					}}
+				/>
+			</div>
+		</div>
+	)
+}
+
 const techServices = [
 	{
-		tag: '01',
+		
 		title: 'Web Development',
 		desc: 'Custom-built, fast, and responsive websites designed to convert visitors into clients. From landing pages to full-scale platforms.',
-		features: ['React / Next.js', 'Responsive Design', 'SEO Optimized', 'Performance First'],
+		features: ['Responsive Design', 'SEO Optimized', 'Performance First'],
 		icon: (
 			<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} width={28} height={28}>
 				<path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -40,7 +112,7 @@ const techServices = [
 		),
 	},
 	{
-		tag: '02',
+		
 		title: 'Software Solutions',
 		desc: 'Tailored software applications built to streamline your business operations, automate workflows, and scale with your growth.',
 		features: ['Custom Applications', 'API Integration', 'Cloud Solutions', 'Ongoing Support'],
@@ -54,7 +126,7 @@ const techServices = [
 
 const designServices = [
 	{
-		tag: '03',
+		
 		title: 'Logo Design',
 		desc: 'Distinctive, memorable logos that tell your brand story at a glance.',
 		icon: (
@@ -64,7 +136,7 @@ const designServices = [
 		),
 	},
 	{
-		tag: '04',
+		
 		title: 'Social Media Design',
 		desc: 'Scroll-stopping graphics, posts, and templates built for engagement.',
 		icon: (
@@ -74,7 +146,7 @@ const designServices = [
 		),
 	},
 	{
-		tag: '05',
+		
 		title: 'Book & Tute Cover Design',
 		desc: 'Professional covers for textbooks, tutorials, and publications that stand out.',
 		icon: (
@@ -84,7 +156,7 @@ const designServices = [
 		),
 	},
 	{
-		tag: '06',
+		
 		title: 'Print Design',
 		desc: 'Brochures, flyers, banners, and print-ready materials with precision craft.',
 		icon: (
@@ -94,7 +166,7 @@ const designServices = [
 		),
 	},
 	{
-		tag: '07',
+		
 		title: 'UI/UX Design',
 		desc: 'Intuitive interfaces and user flows that delight users and drive results.',
 		icon: (
@@ -109,6 +181,21 @@ const stats = [
 	{ value: 4, suffix: '+', label: 'Years Experience' },
 	{ value: 300, suffix: '+', label: 'Happy Clients' },
 	{ value: 400, suffix: '+', label: 'Projects Completed' },
+]
+
+const proficiencySkills = [
+	[
+		{ label: 'Graphic Design', percent: 95 },
+		{ label: 'Logo & Brand Identity', percent: 92 },
+		{ label: 'Social Media Design', percent: 90 },
+		{ label: 'Print Design', percent: 88 },
+	],
+	[
+		{ label: 'UI / UX Design', percent: 85 },
+		{ label: 'Web Development', percent: 95 },
+		{ label: 'Software Solutions', percent: 80 },
+		{ label: 'Book & Cover Design', percent: 87 },
+	],
 ]
 
 export default function Services() {
@@ -181,7 +268,7 @@ export default function Services() {
 					<div className="grid gap-4 md:grid-cols-2">
 						{techServices.map((svc, i) => (
 							<div
-								key={svc.tag}
+								
 								className="group relative overflow-hidden rounded-2xl p-8 transition-all duration-500 hover:shadow-[0_0_50px_rgba(247,147,26,0.08)]"
 								style={{
 									background: 'linear-gradient(145deg, rgba(18,18,18,0.95) 0%, rgba(8,8,8,0.98) 100%)',
@@ -214,7 +301,7 @@ export default function Services() {
 										className="font-black tabular-nums"
 										style={{ fontSize: '4rem', lineHeight: 1, color: 'rgba(247,209,90,0.05)' }}
 									>
-										{svc.tag}
+										
 									</span>
 								</div>
 
@@ -254,7 +341,7 @@ export default function Services() {
 					<div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
 						{designServices.map((svc, i) => (
 							<div
-								key={svc.tag}
+							
 								className="group relative overflow-hidden rounded-xl p-6 transition-all duration-400 hover:shadow-[0_0_30px_rgba(247,147,26,0.07)]"
 								style={{
 									background: 'rgba(10,10,10,0.8)',
@@ -273,7 +360,8 @@ export default function Services() {
 									className="pointer-events-none absolute right-4 top-3 select-none font-black"
 									style={{ fontSize: '3.5rem', lineHeight: 1, color: 'rgba(247,209,90,0.04)' }}
 								>
-									{svc.tag}
+									
+									
 								</span>
 
 								<div className="relative z-10">
@@ -324,6 +412,51 @@ export default function Services() {
 									<path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
 								</svg>
 							</a>
+						</div>
+					</div>
+				</div>
+
+				{/* ══ PROFICIENCY ══ */}
+				<div className="mt-16">
+					{/* Sub-header */}
+					<div className="mb-10 flex items-center gap-3">
+						<span className="text-[0.6rem] font-bold uppercase tracking-[0.45em] text-[#f7931a]">Our Proficiency</span>
+						<div className="h-[1px] flex-1 opacity-10" style={{ background: '#f7d15a' }} />
+					</div>
+
+					<div
+						className="overflow-hidden rounded-2xl p-8 sm:p-10"
+						style={{
+							background: 'linear-gradient(145deg, rgba(14,14,14,0.97) 0%, rgba(8,8,8,0.99) 100%)',
+							border: '1px solid rgba(247,209,90,0.07)',
+						}}
+					>
+						{/* Corner accents */}
+						<div className="pointer-events-none absolute left-0 top-0 h-20 w-[2px] rounded-full" style={{ background: 'linear-gradient(180deg,#f7931a,transparent)' }} />
+						<div className="pointer-events-none absolute left-0 top-0 h-[2px] w-20 rounded-full" style={{ background: 'linear-gradient(90deg,#f7931a,transparent)' }} />
+
+						<div className="mb-8">
+							<h3 className="text-[1.5rem] font-black tracking-tight text-white">
+								Skill <span className="logo-grad-text">Proficiency</span>
+							</h3>
+							<p className="mt-2 text-sm leading-[1.8] text-[#5a5650] max-w-md">
+								Our expertise spans across creative design and digital technology — each skill honed through years of real-world projects.
+							</p>
+						</div>
+
+						<div className="grid gap-x-14 gap-y-7 sm:grid-cols-2">
+							{proficiencySkills.map((col, ci) =>
+								<div key={ci} className="flex flex-col gap-7">
+									{col.map((skill, si) => (
+										<SkillBar
+											key={skill.label}
+											label={skill.label}
+											percent={skill.percent}
+											delay={(ci * 4 + si) * 80}
+										/>
+									))}
+								</div>
+							)}
 						</div>
 					</div>
 				</div>

@@ -623,3 +623,8 @@ h1, h2, h3, h4 {
   font-weight: 800;
   letter-spacing: -0.025em;
 }
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
