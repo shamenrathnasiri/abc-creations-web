@@ -628,3 +628,111 @@ h1, h2, h3, h4 {
   0%   { transform: translateX(-100%); }
   100% { transform: translateX(300%); }
 }
+
+
+/* =============================================================
+ * Contact Page — Brand-consistent component styles
+ * Sections: contact cards, social strip, footer social icons
+ * Brand colours: #f7931a (orange) / #ffd700 (gold) on #0b0b0b
+ * ============================================================= */
+
+/* ── Contact channel cards (Email Us / WhatsApp / Call Us) ── */
+.contact-channel-card:hover {
+  background: rgba(247, 147, 26, 0.06) !important;
+  border-color: rgba(247, 147, 26, 0.25) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(247, 147, 26, 0.08);
+}
+
+/* ── Social strip cards hover ── */
+.contact-social-strip-card:hover {
+  border-color: rgba(247, 147, 26, 0.2) !important;
+}
+
+/* ── Footer copyright bar social icons ── */
+.footer-social-icon:hover {
+  background: rgba(247, 147, 26, 0.15) !important;
+  color: #f7931a !important;
+}
+
+
+/* =============================================================
+ * Footer Component — Animation & interaction styles
+ * Classes used in: src/components/Footer/Footer.tsx
+ *
+ * .footer-cta-link     — "Sounds Good? Let's Connect" shimmer link
+ * .footer-nav-link     — Footer column navigation links
+ * .footer-strip-card   — Social contact strip cards (Facebook/WA/Email/Phone)
+ * .footer-icon-btn     — Copyright bar social icon buttons
+ * footerCtaShimmer     — Shimmer sweep animation on CTA link
+ * footerDividerPulse   — Pulsing gradient on copyright divider line
+ * ============================================================= */
+
+/* ── CTA shimmer sweep ── */
+@keyframes footerCtaShimmer {
+  0%   { background-position: 200% 0; }
+  50%  { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Copyright divider line pulse ── */
+@keyframes footerDividerPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
+
+/* ── Footer nav links ── */
+.footer-nav-link {
+  position: relative;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.25s ease;
+}
+.footer-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #f7931a, #ffd700);
+  border-radius: 1px;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.footer-nav-link:hover {
+  color: #ffffff;
+}
+.footer-nav-link:hover::after {
+  width: 100%;
+}
+
+/* ── Social strip cards ── */
+.footer-strip-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+.footer-strip-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(247, 147, 26, 0.28);
+  box-shadow: 0 10px 30px rgba(247, 147, 26, 0.08);
+}
+
+/* ── Copyright bar icon buttons ── */
+.footer-icon-btn {
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.footer-icon-btn:hover {
+  background: rgba(247, 147, 26, 0.14) !important;
+  color: #f7931a !important;
+  transform: scale(1.1);
+}
+
+/* ── CTA link ── */
+.footer-cta-link {
+  transition: opacity 0.3s ease;
+}
+.footer-cta-link:hover {
+  opacity: 0.75;
+}
