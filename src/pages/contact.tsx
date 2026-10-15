@@ -1,84 +1,105 @@
-export default function Contact() {
-	return (
-		<section
-			id="contact"
-			className="logo-grad-band relative scroll-mt-28 overflow-hidden border-t border-white/10 px-4 py-24 sm:px-6 lg:px-8"
-		>
-			{/* ── Background decorative ── */}
-			<div className="pointer-events-none absolute inset-0" aria-hidden="true">
-				{/* Large radial glow — bottom centre */}
-				<div
-					className="logo-grad-orb absolute -bottom-32 left-1/2 h-[500px] w-[700px] -translate-x-1/2 blur-3xl opacity-35"
-					style={{ animationDelay: '1.5s' }}
-				/>
-				{/* Top right accent */}
-				<div
-					className="logo-grad-orb absolute -right-16 top-0 h-72 w-72 blur-2xl opacity-20"
-					style={{ animationDelay: '4s' }}
-				/>
-				{/* Gradient top edge */}
-				<div className="logo-grad-line absolute top-0 left-0 right-0 h-[2px] opacity-40" />
-			</div>
+﻿import { Mail, Phone, ArrowUpRight } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
+import { Card, CardContent } from "@/components/ui/card";
+import letsConnectBg from "@/assets/letsconnect.jpg";
 
-			<div className="relative z-10 mx-auto max-w-5xl">
-				{/* Section label */}
-				<p className="logo-tag mb-5 inline-block px-5 py-1.5 text-xs font-semibold uppercase tracking-[0.35em]">
-					Contact
-				</p>
+const Contact = () => {
+  const contacts = [
+    {
+      icon: Mail,
+      title: "Email Us",
+      value: "info.abcgraphics@gmail.com",
+      link: "mailto:info.abcgraphics@gmail.com",
+    },
+    {
+      icon: SiWhatsapp,
+      title: "WhatsApp",
+      value: "071 523 4993",
+      link: "https://wa.me/94715234993",
+    },
+    {
+      icon: Phone,
+      title: "Call Us",
+      value: "075 971 5913",
+      link: "tel:+94759715913",
+    },
+  ];
 
-				{/* Headline */}
-				<h2 className="logo-grad-shimmer logo-grad-text mt-2 max-w-3xl text-4xl font-black uppercase tracking-[-0.04em] sm:text-5xl">
-					Have a bold idea? Let's make it real.
-				</h2>
+  return (
+    <section
+      id="contact"
+      className="py-24 sm:py-32 relative bg-cover bg-center bg-no-repeat overflow-hidden"
+      style={{
+        backgroundImage: `linear-gradient(rgba(15, 15, 15, 0.88), rgba(15, 15, 15, 0.92)), url(${letsConnectBg})`,
+      }}
+    >
+      {/* Ambient orbs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full blur-[100px]" style={{ background: "hsl(28 84% 49% / 0.06)" }} />
+        <div className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] rounded-full blur-[80px]" style={{ background: "hsl(38 100% 59% / 0.04)" }} />
+      </div>
 
-				{/* Animated accent line */}
-				<div
-					className="logo-grad-line mt-5 h-[3px] w-16 rounded-full"
-					style={{ animation: 'logoGradIn 0.8s ease-out 0.3s both' }}
-				/>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-16 animate-fade-in">
+          <span className="inline-block text-xs uppercase tracking-[0.35em] text-primary font-semibold mb-3">
+            Get In Touch
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Let's Connect</h2>
+          <p className="text-xl text-white/40 max-w-xl mx-auto">
+            Ready to bring your ideas to life? Get in touch with us
+          </p>
+        </div>
 
-				<p className="mt-8 max-w-xl text-lg leading-8 text-[#c8c4b8]">
-					Tell us what you are building and we will help shape the right creative direction.
-				</p>
+        <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+          {contacts.map((contact, index) => {
+            const Icon = contact.icon;
+            return (
+              <a
+                key={contact.title}
+                href={contact.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block group"
+              >
+                <Card
+                  className="relative border border-white/[0.06] shadow-card hover:shadow-elevated transition-all duration-500 hover:-translate-y-3 cursor-pointer animate-scale-in overflow-hidden rounded-2xl"
+                  style={{
+                    animationDelay: `${index * 0.1}s`,
+                    background: "linear-gradient(180deg, hsl(0 0% 14% / 0.8), hsl(0 0% 11% / 0.8))",
+                    backdropFilter: "blur(16px)",
+                  }}
+                >
+                  {/* Hover gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-				{/* CTA */}
-				<a
-					href="mailto:hello@abccreations.com"
-					className="logo-cta-btn mt-10 inline-flex rounded-full px-8 py-4 text-sm uppercase tracking-[0.2em]"
-				>
-					Start a conversation
-				</a>
+                  {/* Top accent */}
+                  <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-				{/* Decorative contact strip */}
-				<div className="mt-16 relative overflow-hidden rounded-2xl border border-[rgba(255,215,0,0.08)] bg-[rgba(10,10,10,0.6)] p-8 backdrop-blur-sm">
-					{/* Top shimmer accent */}
-					<div className="logo-grad-shimmer absolute left-0 top-0 right-0 h-[2px] logo-grad-line" />
+                  <CardContent className="pt-8 pb-6 text-center relative">
+                    <div className="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center mx-auto mb-5 shadow-lg shadow-primary/20 group-hover:shadow-primary/40 group-hover:scale-110 transition-all duration-500">
+                      <Icon className="h-7 w-7 text-white" />
+                    </div>
+                    <h3 className="font-bold text-lg mb-2 text-white">{contact.title}</h3>
+                    <p className="text-primary font-medium text-sm">{contact.value}</p>
 
-					<div className="flex flex-wrap gap-10 text-center justify-center sm:justify-start">
-						{[
-							{ label: 'Email', value: 'hello@abccreations.com', href: 'mailto:hello@abccreations.com' },
-							{ label: 'Based in', value: 'Sri Lanka 🇱🇰', href: undefined },
-							{ label: 'Response time', value: 'Within 24 hours', href: undefined },
-						].map((item) => (
-							<div key={item.label} className="group">
-								<p className="mb-1 text-xs font-semibold uppercase tracking-[0.3em] text-[#a09c92]">
-									{item.label}
-								</p>
-								{item.href ? (
-									<a
-										href={item.href}
-										className="logo-grad-text text-base font-semibold transition-opacity duration-300 hover:opacity-80"
-									>
-										{item.value}
-									</a>
-								) : (
-									<p className="logo-grad-text text-base font-semibold">{item.value}</p>
-								)}
-							</div>
-						))}
-					</div>
-				</div>
-			</div>
-		</section>
-	)
-}
+                    {/* Arrow indicator */}
+                    <div className="mt-4 flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full border border-white/[0.06] flex items-center justify-center group-hover:border-primary/30 group-hover:bg-primary/10 transition-all duration-300">
+                        <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-primary transition-colors duration-300" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Section divider */}
+      <div className="section-divider absolute bottom-0 left-0 right-0" />
+    </section>
+  );
+};
+
+export default Contact;

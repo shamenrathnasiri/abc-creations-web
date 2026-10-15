@@ -1,186 +1,273 @@
 import { useEffect, useRef, useState } from 'react'
 
-function CountUp({ target, suffix = '' }: { target: number | string; suffix?: string }) {
-	const [count, setCount] = useState(0)
-	const ref = useRef<HTMLSpanElement>(null)
-	const started = useRef(false)
+function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
+  const [count, setCount] = useState(0)
+  const ref = useRef<HTMLDivElement>(null)
+  const started = useRef(false)
 
-	useEffect(() => {
-		if (typeof target !== 'number') return
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting && !started.current) {
-					started.current = true
-					const duration = 1800
-					const steps = 60
-					const increment = target / steps
-					let current = 0
-					const timer = setInterval(() => {
-						current += increment
-						if (current >= target) {
-							setCount(target)
-							clearInterval(timer)
-						} else {
-							setCount(Math.floor(current))
-						}
-					}, duration / steps)
-				}
-			},
-			{ threshold: 0.3 }
-		)
-		if (ref.current) observer.observe(ref.current)
-		return () => observer.disconnect()
-	}, [target])
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true
+          const duration = 2000
+          const steps = 80
+          const increment = target / steps
+          let current = 0
+          const timer = setInterval(() => {
+            current += increment
+            if (current >= target) {
+              setCount(target)
+              clearInterval(timer)
+            } else {
+              setCount(Math.floor(current))
+            }
+          }, duration / steps)
+        }
+      },
+      { threshold: 0.4 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [target])
 
-	if (typeof target !== 'number') {
-		return <span ref={ref}>{target}</span>
-	}
-	return <span ref={ref}>{count}{suffix}</span>
+  return (
+    <div ref={ref}>
+      {count}
+      {suffix}
+    </div>
+  )
 }
 
+const pillars = [
+  {
+    number: '01',
+    title: 'Creativity First',
+    body: 'Every pixel is intentional. We craft designs that don\'t just look good — they tell your story and set you apart from the noise.',
+    accent: 'hsl(28 84% 49%)',
+  },
+  {
+    number: '02',
+    title: 'Built to Last',
+    body: 'From logos to full web systems, we build with quality and longevity in mind — solutions that grow with your business.',
+    accent: 'hsl(38 100% 59%)',
+  },
+  {
+    number: '03',
+    title: 'Client Obsessed',
+    body: 'You\'re not just a project. We invest in understanding your goals and stay with you until the result truly exceeds expectations.',
+    accent: 'hsl(28 84% 49%)',
+  },
+]
+
+const stats = [
+  { value: 120, suffix: '+', label: 'Projects Delivered' },
+  { value: 3, suffix: '+', label: 'Years of Experience' },
+  { value: 98, suffix: '%', label: 'Client Satisfaction' },
+  { value: 40, suffix: '+', label: 'Happy Clients' },
+]
+
 export default function About() {
-	return (
-		<section
-			id="about"
-			className="relative scroll-mt-28 overflow-hidden bg-[#050505] px-4 py-24 sm:px-6 lg:px-8"
-		>
-			{/* Background */}
-			<div className="pointer-events-none absolute inset-0" aria-hidden="true">
-				<div
-					className="absolute inset-0 opacity-[0.015]"
-					style={{
-						backgroundImage: 'radial-gradient(circle, rgba(247,209,90,1) 1px, transparent 1px)',
-						backgroundSize: '32px 32px',
-					}}
-				/>
-				<div
-					className="absolute -right-60 -top-60 h-[600px] w-[600px] rounded-full opacity-[0.06]"
-					style={{ background: 'radial-gradient(circle, #f7931a 0%, transparent 65%)' }}
-				/>
-				<div
-					className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full opacity-[0.04]"
-					style={{ background: 'radial-gradient(circle, #ffd700 0%, transparent 65%)' }}
-				/>
-			</div>
+  const sectionRef = useRef<HTMLElement>(null)
+  const [inView, setInView] = useState(false)
 
-			<div className="relative z-10 mx-auto max-w-5xl">
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setInView(true) },
+      { threshold: 0.1 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
 
-				{/* ── Section label ── */}
-				<div className="mb-12 flex items-center gap-4">
-					<div className="h-[1px] w-8" style={{ background: 'linear-gradient(90deg, #f7931a, #ffd700)' }} />
-					<span className="text-lg font-bold uppercase tracking-[0.4em] text-[#f7d15a]">About Us</span>
-					<div className="h-[1px] flex-1 opacity-10" style={{ background: '#f7d15a' }} />
-				</div>
+  return (
+    <section
+      id="about"
+      ref={sectionRef}
+      className="relative scroll-mt-24 overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #050505 0%, #080808 100%)' }}
+    >
+      {/* ── Decorative background elements ── */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        {/* Large radial glow top-right */}
+        <div
+          className="absolute -right-32 top-0 h-[700px] w-[700px] rounded-full"
+          style={{ background: 'radial-gradient(circle, hsl(28 84% 49% / 0.07) 0%, transparent 65%)' }}
+        />
+        {/* Subtle glow bottom-left */}
+        <div
+          className="absolute -bottom-24 -left-24 h-[500px] w-[500px] rounded-full"
+          style={{ background: 'radial-gradient(circle, hsl(38 100% 59% / 0.05) 0%, transparent 60%)' }}
+        />
+        {/* Horizontal rule accent */}
+        <div
+          className="absolute top-0 left-0 right-0 h-[1px]"
+          style={{ background: 'linear-gradient(90deg, transparent, hsl(28 84% 49% / 0.3), transparent)' }}
+        />
+      </div>
 
-				{/* ── Heading ── */}
-				<div className="mb-16">
-					<h2
-						className="font-black leading-[1.15] text-white"
-						style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}
-					>
-						We are{' '}
-						<span className="logo-grad-text">ABC Creations</span>
-					</h2>
-					<p className="mt-4 max-w-2xl text-base leading-[1.85] text-[#7a7670]">
-						We combine creativity, technology, and strategic thinking to deliver meaningful digital experiences and solutions that help businesses build stronger brands, connect with their audiences, and grow with confidence.
-					</p>
-				</div>
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-28 lg:px-8">
 
-			
-				{/* ── Mission & Vision ── */}
-				<div className="flex flex-col gap-0 overflow-hidden rounded-2xl" style={{ border: '1px solid rgba(247,209,90,0.08)' }}>
+        {/* ── TOP: Label + Hero headline ── */}
+        <div
+          className="mb-20 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20 lg:items-end"
+        >
+          {/* Left: headline */}
+          <div
+            className="transition-all duration-700"
+            style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(32px)' }}
+          >
+            <span
+              className="mb-5 inline-flex items-center gap-3 text-[0.7rem] font-bold uppercase tracking-[0.35em]"
+              style={{ color: 'hsl(28 84% 49%)' }}
+            >
+              <span
+                className="inline-block h-[2px] w-6 rounded-full"
+                style={{ background: 'linear-gradient(90deg, hsl(28 84% 49%), hsl(38 100% 59%))' }}
+              />
+              Who We Are
+            </span>
 
-					{/* Mission */}
-					<div
-						className="about-mv-row group relative flex flex-col gap-6 overflow-hidden px-8 py-10 transition-all duration-500 sm:flex-row sm:items-start sm:gap-10 sm:px-12"
-						style={{ background: 'rgba(8,8,8,0.85)', borderBottom: '1px solid rgba(247,209,90,0.06)' }}
-					>
-						{/* Hover fill */}
-						<div
-							className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-							style={{ background: 'linear-gradient(105deg, rgba(247,147,26,0.05) 0%, transparent 55%)' }}
-						/>
+            <h2
+              className="font-black text-white leading-[1.1] tracking-tight"
+              style={{ fontSize: 'clamp(2.2rem, 5vw, 3.6rem)' }}
+            >
+              We design{' '}
+              <span
+                style={{
+                  background: 'linear-gradient(135deg, hsl(28 84% 49%), hsl(38 100% 59%))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                brands
+              </span>{' '}
+              that{' '}
+              <br className="hidden lg:block" />
+              people{' '}
+              <span className="italic font-extrabold text-white/30">remember.</span>
+            </h2>
+          </div>
 
-						{/* Left — label + icon */}
-						<div className="relative z-10 flex flex-shrink-0 items-center gap-4 sm:flex-col sm:items-start sm:gap-3 sm:pt-1">
-							<div
-								className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl text-[#f7d15a] transition-transform duration-300 group-hover:scale-110"
-								style={{ background: 'rgba(247,209,90,0.07)', border: '1px solid rgba(247,209,90,0.14)' }}
-							>
-								<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} width={22} height={22}>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-								</svg>
-							</div>
-							<p className="text-[0.62rem] font-bold uppercase tracking-[0.45em] text-[#f7931a] sm:mt-1">Mission</p>
-						</div>
+          {/* Right: description + CTA */}
+          <div
+            className="transition-all duration-700 delay-150"
+            style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(32px)' }}
+          >
+            <p className="text-base leading-[1.9] mb-6" style={{ color: '#6b6864' }}>
+              ABC Graphics is a creative studio based in Sri Lanka, specialising in graphic design,
+              web development, and digital branding. We partner with businesses — from startups to
+              established brands — to craft visual identities and digital experiences that truly stand out.
+            </p>
+            <p className="text-base leading-[1.9]" style={{ color: '#6b6864' }}>
+              Every project we take on is treated with the same care and dedication, regardless of size.
+              We believe great design isn't a luxury — it's what separates forgettable brands from
+              unforgettable ones.
+            </p>
+          </div>
+        </div>
 
-						{/* Right — content */}
-						<div className="relative z-10 flex-1">
-							{/* Accent bar */}
-							<div
-								className="mb-5 h-[2px] w-10 rounded-full transition-all duration-500 group-hover:w-16"
-								style={{ background: 'linear-gradient(90deg, #f7931a, #ffd700)' }}
-							/>
-							<h3
-								className="mb-3 font-bold leading-[1.25] text-white"
-								style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}
-							>
-								Transforming Ideas Into{' '}
-								<span className="logo-grad-text">Powerful Experiences</span>
-							</h3>
-							<p className="text-sm leading-[1.9] text-[#7a7670]">
-								We combine creativity, technology, and strategy to deliver exceptional UI/UX, web solutions, software, and graphic design that inspire and elevate brands.
-							</p>
-						</div>
-					</div>
+        {/* ── STATS ROW ── */}
+        <div
+          className="mb-20 grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-2xl"
+          style={{ border: '1px solid rgba(255,255,255,0.04)', background: 'rgba(255,255,255,0.04)' }}
+        >
+          {stats.map((stat, i) => (
+            <div
+              key={stat.label}
+              className="flex flex-col items-center justify-center gap-2 px-6 py-8 group transition-all duration-500"
+              style={{
+                background: '#080808',
+                transitionDelay: `${i * 80}ms`,
+              }}
+            >
+              <div
+                className="text-4xl md:text-5xl font-black tabular-nums"
+                style={{
+                  background: 'linear-gradient(135deg, hsl(28 84% 49%), hsl(38 100% 59%))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                <CountUp target={stat.value} suffix={stat.suffix} />
+              </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-center" style={{ color: '#5a5855' }}>
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
 
-					{/* Vision */}
-					<div
-						className="about-mv-row group relative flex flex-col gap-6 overflow-hidden px-8 py-10 transition-all duration-500 sm:flex-row sm:items-start sm:gap-10 sm:px-12"
-						style={{ background: 'rgba(10,10,10,0.75)' }}
-					>
-						{/* Hover fill */}
-						<div
-							className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-							style={{ background: 'linear-gradient(105deg, rgba(255,215,0,0.04) 0%, transparent 55%)' }}
-						/>
-					{/* Left — label + icon */}
-						<div className="relative z-10 flex flex-shrink-0 items-center gap-4 sm:flex-col sm:items-start sm:gap-3 sm:pt-1">
-							<div
-								className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl text-[#f7d15a] transition-transform duration-300 group-hover:scale-110"
-								style={{ background: 'rgba(247,209,90,0.07)', border: '1px solid rgba(247,209,90,0.14)' }}
-							>
-								<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.6} width={22} height={22}>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-									<path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-								</svg>
-							</div>
-							<p className="text-[0.62rem] font-bold uppercase tracking-[0.45em] text-[#f7931a] sm:mt-1">Vision</p>
-						</div>
+        {/* ── PILLARS ── */}
+        <div
+          className="transition-all duration-700 delay-200 mb-2"
+          style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(24px)' }}
+        >
+          <p
+            className="text-[0.7rem] font-bold uppercase tracking-[0.35em] mb-8"
+            style={{ color: 'hsl(28 84% 49%)' }}
+          >
+            Our Principles
+          </p>
+        </div>
 
-						{/* Right — content */}
-						<div className="relative z-10 flex-1">
-							{/* Accent bar */}
-							<div
-								className="mb-5 h-[2px] w-10 rounded-full transition-all duration-500 group-hover:w-16"
-								style={{ background: 'linear-gradient(90deg, #ffd700, #ffe87a)' }}
-							/>
-							<h3
-								className="mb-3 font-bold leading-[1.25] text-white"
-								style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}
-							>
-								Shaping the Future of{' '}
-								<span className="logo-grad-text">Design & Development</span>
-							</h3>
-							<p className="text-sm leading-[1.9] text-[#7a7670]">
-								To grow as a creative and reliable studio that builds lasting partnerships, empowers local businesses, and drives innovation with passion and purpose.
-							</p>
-						</div>
-					</div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {pillars.map((pillar, i) => (
+            <div
+              key={pillar.number}
+              className="group relative overflow-hidden rounded-2xl p-8 cursor-default transition-all duration-500 hover:-translate-y-1"
+              style={{
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px solid rgba(255,255,255,0.05)',
+                transitionDelay: `${i * 80}ms`,
+                opacity: inView ? 1 : 0,
+                transform: inView ? 'translateY(0)' : 'translateY(24px)',
+                transition: `opacity 0.6s ease ${i * 100}ms, transform 0.6s ease ${i * 100}ms`,
+              }}
+            >
+              {/* Hover glow */}
+              <div
+                className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                style={{ background: `radial-gradient(circle at 30% 40%, ${pillar.accent}14 0%, transparent 65%)` }}
+              />
 
-				</div>
+              {/* Top accent line */}
+              <div
+                className="absolute top-0 left-8 right-8 h-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ background: `linear-gradient(90deg, transparent, ${pillar.accent}, transparent)` }}
+              />
 
-			</div>
-		</section>
-	)
+              {/* Number */}
+              <span
+                className="block text-5xl font-black mb-6 leading-none select-none"
+                style={{
+                  color: `${pillar.accent}18`,
+                  fontVariantNumeric: 'tabular-nums',
+                  letterSpacing: '-0.04em',
+                }}
+              >
+                {pillar.number}
+              </span>
+
+              {/* Divider */}
+              <div
+                className="mb-5 h-[2px] w-8 rounded-full transition-all duration-500 group-hover:w-14"
+                style={{ background: `linear-gradient(90deg, ${pillar.accent}, hsl(38 100% 59%))` }}
+              />
+
+              <h3 className="text-lg font-bold text-white mb-3 tracking-tight">
+                {pillar.title}
+              </h3>
+              <p className="text-sm leading-[1.85]" style={{ color: '#65625f' }}>
+                {pillar.body}
+              </p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  )
 }
