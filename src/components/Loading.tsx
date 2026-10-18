@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import logoSrc from '../assets/logo/logo.png'
 
 /* ─────────────────────────────────────────────────────────────
@@ -55,7 +55,7 @@ export default function LoadingScreen({ minDelay = 2200, onDone }: Props) {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#020202',
+        background: '#000000',
         transition: 'opacity 0.7s ease, transform 0.7s ease',
         opacity: phase === 'exit' ? 0 : 1,
         transform: phase === 'exit' ? 'scale(1.03)' : 'scale(1)',
@@ -73,14 +73,14 @@ export default function LoadingScreen({ minDelay = 2200, onDone }: Props) {
           width: 600, height: 600,
           transform: 'translate(-50%, -50%)',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(247,147,26,0.13) 0%, rgba(255,215,0,0.08) 40%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(245,126,34,0.13) 0%, rgba(255,215,0,0.08) 40%, transparent 70%)',
           animation: 'lcOrbPulse 4s ease-in-out infinite',
         }} />
         {/* Top-left accent */}
         <div style={{
           position: 'absolute', top: '-80px', left: '-80px',
           width: 320, height: 320, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(247,147,26,0.09), transparent 70%)',
+          background: 'radial-gradient(circle, rgba(245,126,34,0.09), transparent 70%)',
           animation: 'lcOrbPulse 5s ease-in-out infinite reverse',
         }} />
         {/* Bottom-right accent */}
@@ -115,7 +115,7 @@ export default function LoadingScreen({ minDelay = 2200, onDone }: Props) {
           position: 'absolute',
           width: 180, height: 180,
           borderRadius: '50%',
-          background: 'conic-gradient(from 0deg, #f7931a, #ffd700, #ffe87a, transparent 60%, transparent 80%, #f7931a)',
+          background: 'conic-gradient(from 0deg, #f57e22, #ffda00, #ffda00, transparent 60%, transparent 80%, #f57e22)',
           animation: 'lcSpin 2.4s linear infinite',
           WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 2px))',
           mask: 'radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 2px))',
@@ -135,7 +135,7 @@ export default function LoadingScreen({ minDelay = 2200, onDone }: Props) {
           position: 'absolute',
           width: 120, height: 120,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(247,147,26,0.22) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(245,126,34,0.22) 0%, transparent 70%)',
           filter: 'blur(12px)',
           animation: 'lcOrbPulse 3s ease-in-out infinite',
         }} />
@@ -151,7 +151,7 @@ export default function LoadingScreen({ minDelay = 2200, onDone }: Props) {
             zIndex: 2,
             width: 88, height: 88,
             objectFit: 'contain',
-            filter: 'drop-shadow(0 0 28px rgba(247,147,26,0.55))',
+            filter: 'drop-shadow(0 0 28px rgba(245,126,34,0.55))',
             animation: 'lcLogoFloat 3s ease-in-out infinite',
           }}
         />
@@ -168,9 +168,9 @@ export default function LoadingScreen({ minDelay = 2200, onDone }: Props) {
             top: -5, left: '50%',
             width: 10, height: 10,
             borderRadius: '50%',
-            background: '#f7931a',
+            background: '#f57e22',
             transform: 'translateX(-50%)',
-            boxShadow: '0 0 14px rgba(247,147,26,0.8)',
+            boxShadow: '0 0 14px rgba(245,126,34,0.8)',
           }} />
         </div>
 
@@ -186,7 +186,7 @@ export default function LoadingScreen({ minDelay = 2200, onDone }: Props) {
             bottom: -4, left: '50%',
             width: 7, height: 7,
             borderRadius: '50%',
-            background: '#ffe87a',
+            background: '#ffda00',
             transform: 'translateX(-50%)',
             boxShadow: '0 0 10px rgba(255,232,122,0.7)',
           }} />
@@ -200,7 +200,7 @@ export default function LoadingScreen({ minDelay = 2200, onDone }: Props) {
           fontWeight: 900,
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
-          background: 'linear-gradient(135deg, #f7931a, #ffd700, #ffe87a)',
+          background: 'linear-gradient(135deg, #f57e22, #ffda00, #ffda00)',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
@@ -243,7 +243,7 @@ export default function LoadingScreen({ minDelay = 2200, onDone }: Props) {
             height: '100%',
             width: `${progress}%`,
             borderRadius: 999,
-            background: 'linear-gradient(90deg, #f7931a, #ffd700, #ffe87a)',
+            background: 'linear-gradient(90deg, #f57e22, #ffda00, #ffda00)',
             transition: 'width 0.05s linear',
             boxShadow: '0 0 10px rgba(255,215,0,0.5)',
           }} />
@@ -267,7 +267,7 @@ export default function LoadingScreen({ minDelay = 2200, onDone }: Props) {
           fontSize: 11,
           fontWeight: 700,
           letterSpacing: '0.15em',
-          background: 'linear-gradient(135deg, #f7931a, #ffd700)',
+          background: 'linear-gradient(135deg, #f57e22, #ffda00)',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
           WebkitTextFillColor: 'transparent',

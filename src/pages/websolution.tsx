@@ -1,4 +1,4 @@
-export default function WebSolution() {
+﻿export default function WebSolution() {
 	const features = [
 		{ label: 'Landing Pages', icon: '⚡' },
 		{ label: 'Business Websites', icon: '🏢' },
@@ -48,7 +48,7 @@ export default function WebSolution() {
 					{features.map((f) => (
 						<div
 							key={f.label}
-							className="logo-grad-border group flex items-center gap-2 rounded-full border border-[rgba(255,215,0,0.15)] bg-[rgba(255,215,0,0.04)] px-5 py-2.5 text-sm font-medium text-[#ffe87a] transition-all duration-300 hover:bg-[rgba(255,215,0,0.08)] hover:shadow-[0_0_20px_rgba(255,215,0,0.12)]"
+							className="logo-grad-border group flex items-center gap-2 rounded-full border border-[rgba(255,215,0,0.15)] bg-[rgba(255,215,0,0.04)] px-5 py-2.5 text-sm font-medium text-[#ffda00] transition-all duration-300 hover:bg-[rgba(255,215,0,0.08)] hover:shadow-[0_0_20px_rgba(255,215,0,0.12)]"
 						>
 							<span>{f.icon}</span>
 							{f.label}
@@ -68,7 +68,7 @@ export default function WebSolution() {
 						].map((item) => (
 							<div key={item.stat} className="group">
 								<p className="logo-grad-text text-3xl font-black tracking-tight">{item.stat}</p>
-								<p className="mt-2 text-sm text-[#a09c92] group-hover:text-[#ffe87a] transition-colors duration-300">{item.desc}</p>
+								<p className="mt-2 text-sm text-[#a09c92] group-hover:text-[#ffda00] transition-colors duration-300">{item.desc}</p>
 							</div>
 						))}
 					</div>

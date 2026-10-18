@@ -1,4 +1,4 @@
-import heroBg from '../assets/home/hero-bg.png'
+﻿import heroBg from '../assets/home/hero-bg.png'
 
 export default function Home() {
 	return (
@@ -34,9 +34,9 @@ export default function Home() {
 								{/* Eyebrow */}
 								<p className="mb-6 flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-[0.38em] text-white/70">
 									<span>Creative</span>
-									<span className="text-[#f7931a]">✕</span>
+									<span className="text-[#f57e22]">✕</span>
 									<span>Technology</span>
-									<span className="text-[#f7931a]">✕</span>
+									<span className="text-[#f57e22]">✕</span>
 									<span>Your Success</span>
 								</p>
 
@@ -45,7 +45,7 @@ export default function Home() {
 											className="text-[clamp(2.6rem,5vw,4.8rem)] font-black uppercase leading-[0.92] tracking-[-0.02em] text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.7)] drop-shadow-[0_4px_36px_rgba(0,0,0,0.5)]"
 										>
 											Bold Ideas,{' '}
-											<span className="block bg-gradient-to-r from-[#f7931a] via-[#ffd700] to-[#ffe87a] bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(247,147,26,0.5)]">
+											<span className="block bg-gradient-to-r from-[#f57e22] via-[#ffda00] to-[#ffda00] bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(245,126,34,0.5)]">
 												Beautifully
 											</span>
 											Made.
@@ -67,8 +67,8 @@ export default function Home() {
 									<a
 										href="#contact"
 										id="hero-cta-book"
-										className="inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-[#111] shadow-lg transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
-										style={{ background: 'linear-gradient(90deg,#f7931a,#ffd700)' }}
+										className="inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-[#000000] shadow-lg transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
+										style={{ background: 'linear-gradient(90deg,#f57e22,#ffda00)' }}
 									>
 										<svg className="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
 											<path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -78,7 +78,7 @@ export default function Home() {
 									<a
 										href="#portfolio"
 										id="hero-cta-work"
-										className="inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm transition-all duration-300 hover:border-[rgba(255,215,0,0.5)] hover:text-[#ffd700]"
+										className="inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm transition-all duration-300 hover:border-[rgba(255,215,0,0.5)] hover:text-[#ffda00]"
 									>
 										<span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border border-white/40">
 											<svg className="h-2.5 w-2.5 translate-x-[1px]" viewBox="0 0 8 10" fill="currentColor">
@@ -148,7 +148,7 @@ export default function Home() {
 							<div key={s.title} className="flex items-center gap-2.5">
 								<span
 									className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
-									style={{ background: 'rgba(247,147,26,0.15)', color: '#f7931a' }}
+									style={{ background: 'rgba(245,126,34,0.15)', color: '#f57e22' }}
 								>
 									{s.icon}
 								</span>
@@ -171,7 +171,7 @@ export default function Home() {
 						</p>
 						<div
 							className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full"
-							style={{ background: 'linear-gradient(135deg,#f7931a,#ffd700)', color: '#111' }}
+							style={{ background: 'linear-gradient(135deg,#f57e22,#ffda00)', color: '#000000' }}
 						>
 							<svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
 								<path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -183,7 +183,7 @@ export default function Home() {
 			{/* ── CSS ── */}
 			<style>{`
 				.hero-service-pill:hover {
-					background: rgba(247,147,26,0.14) !important;
+					background: rgba(245,126,34,0.14) !important;
 					border-color: rgba(247,209,90,0.35) !important;
 				}
 			`}</style>

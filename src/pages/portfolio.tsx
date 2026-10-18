@@ -1,4 +1,4 @@
-export default function Portfolio() {
+﻿export default function Portfolio() {
 	const projects = [
 		{ title: 'Brand Systems', tag: 'Identity', desc: 'Visual language built to scale.' },
 		{ title: 'Campaign Visuals', tag: 'Marketing', desc: 'Designs that stop the scroll.' },
@@ -47,12 +47,12 @@ export default function Portfolio() {
 					{projects.map((project, i) => (
 						<article
 							key={project.title}
-							className="logo-grad-border group relative flex min-h-48 flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#161616] to-[#080808] p-7 transition-all duration-500 hover:border-[rgba(255,215,0,0.2)] hover:shadow-[0_10px_50px_rgba(247,147,26,0.1)]"
+							className="logo-grad-border group relative flex min-h-48 flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#161616] to-[#080808] p-7 transition-all duration-500 hover:border-[rgba(255,215,0,0.2)] hover:shadow-[0_10px_50px_rgba(245,126,34,0.1)]"
 							style={{ transitionDelay: `${i * 70}ms` }}
 						>
 							{/* Gradient corner fill on hover */}
 							<div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-								style={{ background: 'linear-gradient(135deg, rgba(247,147,26,0.06) 0%, transparent 60%)' }}
+								style={{ background: 'linear-gradient(135deg, rgba(245,126,34,0.06) 0%, transparent 60%)' }}
 							/>
 
 							{/* Tag */}

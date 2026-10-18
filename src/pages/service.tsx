@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 
 /* ── DATA ── */
 const services = [
@@ -302,7 +302,7 @@ export default function Services() {
             <div
               key={svc.id}
               className="relative overflow-hidden flex flex-col"
-              style={{ background: 'linear-gradient(135deg, #0a0a0a 0%, #070707 100%)', minHeight: 480 }}
+              style={{ background: 'linear-gradient(135deg, #000000 0%, #000000 100%)', minHeight: 480 }}
             >
               {/* Background glow for active card */}
               <div

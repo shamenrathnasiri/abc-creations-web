@@ -1,15 +1,15 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ══════════════════════════════════════════════════════
    LOGO BRAND GRADIENT — extracted from the AC logo mark
-   Orange  #f7931a  →  Gold  #ffd700  →  Cream  #ffe87a
+   Orange  #f57e22  →  Gold  #ffda00  →  Cream  #ffda00
    ══════════════════════════════════════════════════════ */
 :root {
-  --logo-orange: #f7931a;
-  --logo-gold:   #ffd700;
-  --logo-cream:  #ffe87a;
+  --logo-orange: #f57e22;
+  --logo-gold:   #ffda00;
+  --logo-cream:  #ffda00;
 
   /* Horizontal (left→right) */
   --grad-logo-h:   linear-gradient(90deg,  var(--logo-orange), var(--logo-gold), var(--logo-cream));
@@ -18,7 +18,7 @@
   /* Vertical (bottom → top) */
   --grad-logo-v:   linear-gradient(0deg,   var(--logo-orange), var(--logo-gold), var(--logo-cream));
   /* Radial glow */
-  --glow-logo:     radial-gradient(ellipse at center, rgba(247,209,90,0.18) 0%, rgba(247,147,26,0.10) 40%, transparent 70%);
+  --glow-logo:     radial-gradient(ellipse at center, rgba(255, 218, 0,0.18) 0%, rgba(245, 126, 34,0.10) 40%, transparent 70%);
 }
 
 @layer base {
@@ -27,7 +27,7 @@
     line-height: 1.5;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.87);
-    background: #020202;
+    background: #000000;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -36,7 +36,7 @@
 
   html {
     scroll-behavior: smooth;
-    background: #020202;
+    background: #000000;
   }
 
   body {
@@ -44,8 +44,8 @@
     min-width: 320px;
     min-height: 100vh;
     background:
-      radial-gradient(circle at top, rgba(247, 209, 90, 0.12), transparent 30%),
-      #020202;
+      radial-gradient(circle at top, rgba(255, 218, 0, 0.12), transparent 30%),
+      #000000;
   }
 
   #root {
@@ -109,8 +109,8 @@
     inset: 0;
     background: linear-gradient(
       135deg,
-      rgba(247, 147, 26, 0.08) 0%,
-      rgba(255, 215, 0,  0.05) 40%,
+      rgba(245, 126, 34, 0.08) 0%,
+      rgba(255, 218, 0,  0.05) 40%,
       rgba(255, 232, 122, 0.03) 70%,
       transparent 100%
     );
@@ -132,9 +132,9 @@
     background: linear-gradient(
       110deg,
       transparent,
-      rgba(255, 215, 0, 0.18) 40%,
+      rgba(255, 218, 0, 0.18) 40%,
       rgba(255, 232, 122, 0.28) 50%,
-      rgba(255, 215, 0, 0.18) 60%,
+      rgba(255, 218, 0, 0.18) 60%,
       transparent
     );
     animation: logoGradSweep 4s ease-in-out infinite;
@@ -147,8 +147,8 @@
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      rgba(247, 147, 26, 0.12) 0%,
-      rgba(255, 215, 0,  0.08) 35%,
+      rgba(245, 126, 34, 0.12) 0%,
+      rgba(255, 218, 0,  0.08) 35%,
       transparent 70%
     );
     pointer-events: none;
@@ -161,7 +161,7 @@
     border-radius: 9999px;
     border: 1px solid transparent;
     background:
-      linear-gradient(#020202, #020202) padding-box,
+      linear-gradient(#000000, #000000) padding-box,
       var(--grad-logo-d) border-box;
     color: var(--logo-gold);
   }
@@ -216,11 +216,11 @@
     background: conic-gradient(
       from var(--glow-angle, 0deg),
       transparent 0%,
-      rgba(247, 209, 90, 0.5) 10%,
-      rgba(255, 180, 40, 0.6) 15%,
+      rgba(255, 218, 0, 0.5) 10%,
+      rgba(255, 218, 0, 0.6) 15%,
       transparent 25%,
       transparent 50%,
-      rgba(247, 209, 90, 0.3) 60%,
+      rgba(255, 218, 0, 0.3) 60%,
       rgba(255, 232, 148, 0.5) 65%,
       transparent 75%,
       transparent 100%
@@ -250,7 +250,7 @@
       110deg,
       transparent 20%,
       rgba(255, 232, 148, 0.08) 35%,
-      rgba(247, 209, 90, 0.15) 40%,
+      rgba(255, 218, 0, 0.15) 40%,
       rgba(255, 232, 148, 0.08) 45%,
       transparent 60%
     );
@@ -294,9 +294,9 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(247, 209, 90, 0.4) 20%,
+      rgba(255, 218, 0, 0.4) 20%,
       rgba(255, 232, 148, 0.6) 50%,
-      rgba(247, 209, 90, 0.4) 80%,
+      rgba(255, 218, 0, 0.4) 80%,
       transparent
     );
     animation: bottomAccentExpand 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -322,7 +322,7 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #ffe894, #f2b819);
+    background: linear-gradient(90deg, #ffda00, #f57e22);
     border-radius: 2px;
     transform: translateX(-50%);
     transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -340,7 +340,7 @@
     left: 50%;
     width: 80px;
     height: 80px;
-    background: radial-gradient(circle, rgba(247, 209, 90, 0.15), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 218, 0, 0.15), transparent 70%);
     border-radius: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
@@ -484,13 +484,13 @@
 
   @keyframes logoScrollGlow {
     0% {
-      filter: drop-shadow(0 0 12px rgba(247, 209, 90, 0.3));
+      filter: drop-shadow(0 0 12px rgba(255, 218, 0, 0.3));
     }
     45% {
-      filter: drop-shadow(0 0 28px rgba(255, 180, 40, 0.85));
+      filter: drop-shadow(0 0 28px rgba(255, 218, 0, 0.85));
     }
     100% {
-      filter: drop-shadow(0 0 14px rgba(247, 209, 90, 0.42));
+      filter: drop-shadow(0 0 14px rgba(255, 218, 0, 0.42));
     }
   }
 
@@ -571,7 +571,7 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(247, 209, 90, 0.4) 50%,
+      rgba(255, 218, 0, 0.4) 50%,
       transparent 100%
     );
     background-size: 200% 100%;
@@ -589,8 +589,8 @@
   }
 
   @keyframes aboutLabelGlow {
-    0% { box-shadow: 0 0 8px rgba(247, 209, 90, 0.05); }
-    100% { box-shadow: 0 0 20px rgba(247, 209, 90, 0.12); }
+    0% { box-shadow: 0 0 8px rgba(255, 218, 0, 0.05); }
+    100% { box-shadow: 0 0 20px rgba(255, 218, 0, 0.12); }
   }
 
   /* Reduced motion for about section */
@@ -610,7 +610,7 @@
 }
 
 
-/* -- TYPOGRAPHY � Plus Jakarta Sans heading system -- */
+/* -- TYPOGRAPHY � Plus Jakarta Sans heading system -- */
 h1, h2, h3, h4 {
   font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
   font-weight: 800;
@@ -633,26 +633,26 @@ h1, h2, h3, h4 {
 /* =============================================================
  * Contact Page — Brand-consistent component styles
  * Sections: contact cards, social strip, footer social icons
- * Brand colours: #f7931a (orange) / #ffd700 (gold) on #0b0b0b
+ * Brand colours: #f57e22 (orange) / #ffda00 (gold) on #000000
  * ============================================================= */
 
 /* ── Contact channel cards (Email Us / WhatsApp / Call Us) ── */
 .contact-channel-card:hover {
-  background: rgba(247, 147, 26, 0.06) !important;
-  border-color: rgba(247, 147, 26, 0.25) !important;
+  background: rgba(245, 126, 34, 0.06) !important;
+  border-color: rgba(245, 126, 34, 0.25) !important;
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(247, 147, 26, 0.08);
+  box-shadow: 0 12px 32px rgba(245, 126, 34, 0.08);
 }
 
 /* ── Social strip cards hover ── */
 .contact-social-strip-card:hover {
-  border-color: rgba(247, 147, 26, 0.2) !important;
+  border-color: rgba(245, 126, 34, 0.2) !important;
 }
 
 /* ── Footer copyright bar social icons ── */
 .footer-social-icon:hover {
-  background: rgba(247, 147, 26, 0.15) !important;
-  color: #f7931a !important;
+  background: rgba(245, 126, 34, 0.15) !important;
+  color: #f57e22 !important;
 }
 
 
@@ -694,7 +694,7 @@ h1, h2, h3, h4 {
   left: 0;
   width: 0;
   height: 1px;
-  background: linear-gradient(90deg, #f7931a, #ffd700);
+  background: linear-gradient(90deg, #f57e22, #ffda00);
   border-radius: 1px;
   transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -715,8 +715,8 @@ h1, h2, h3, h4 {
 }
 .footer-strip-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(247, 147, 26, 0.28);
-  box-shadow: 0 10px 30px rgba(247, 147, 26, 0.08);
+  border-color: rgba(245, 126, 34, 0.28);
+  box-shadow: 0 10px 30px rgba(245, 126, 34, 0.08);
 }
 
 /* ── Copyright bar icon buttons ── */
@@ -724,8 +724,8 @@ h1, h2, h3, h4 {
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 .footer-icon-btn:hover {
-  background: rgba(247, 147, 26, 0.14) !important;
-  color: #f7931a !important;
+  background: rgba(245, 126, 34, 0.14) !important;
+  color: #f57e22 !important;
   transform: scale(1.1);
 }
 

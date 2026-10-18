@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import LoadingScreen from './components/Loading'
@@ -18,7 +18,7 @@ function App() {
       {/* Loading overlay — unmounts after exit animation */}
       {!loaded && <LoadingScreen minDelay={2400} onDone={() => setLoaded(true)} />}
 
-      <div className="min-h-screen bg-[#020202] text-white">
+      <div className="min-h-screen bg-[#000000] text-white">
         <Navbar />
 
         <main>
