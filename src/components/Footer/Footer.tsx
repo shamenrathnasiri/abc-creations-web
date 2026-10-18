@@ -1,4 +1,4 @@
-import logo from "@/assets/logo.png";
+﻿import logo from "@/assets/logo.png";
 import {
   Mail,
   MessageCircle,
@@ -137,7 +137,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative overflow-hidden" style={{ background: "#0A0A0A" }}>
+    <footer className="relative overflow-hidden" style={{ background: "#000000" }}>
       {/* ─── Pre-Footer CTA Box ─── */}
       <div className="relative z-10">
         <div className="container mx-auto px-6">
@@ -192,7 +192,7 @@ const Footer = () => {
       <div
         className="relative pt-20 pb-8"
         style={{
-          background: "linear-gradient(180deg, #0A0A0A 0%, #060606 100%)",
+          background: "linear-gradient(180deg, #000000 0%, #060606 100%)",
         }}
       >
         {/* Ambient glow effects */}

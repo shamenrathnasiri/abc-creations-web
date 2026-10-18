@@ -5,16 +5,16 @@ export default {
     extend: {
       colors: {
         gold: {
-          DEFAULT: '#f7d15a',
-          light: '#ffe894',
-          dark: '#f2b819',
+          DEFAULT: '#ffda00',
+          light: '#ffda00',
+          dark: '#f57e22',
         },
         brand: {
-          bg: '#020202',
-          surface: '#0a0a0a',
-          orange: '#f7931a',
-          yellow: '#ffd700',
-          cream: '#ffe87a',
+          bg: '#000000',
+          surface: '#000000',
+          orange: '#f57e22',
+          yellow: '#ffda00',
+          cream: '#ffda00',
         },
       },
       fontFamily: {
