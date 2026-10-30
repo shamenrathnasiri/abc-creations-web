@@ -1,13 +1,13 @@
-﻿import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import logoSrc from '../../assets/logo/logo.png'
 
 const navItems = [
-  { label: 'Home', href: '#' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Our web solutions', href: '#web-solutions' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '#', sectionId: 'home' },
+  { label: 'About', href: '#about', sectionId: 'about' },
+  { label: 'Services', href: '#services', sectionId: 'services' },
+  { label: 'Our web solutions', href: '#web-solutions', sectionId: 'web-solutions' },
+  { label: 'Portfolio', href: '#portfolio', sectionId: 'portfolio' },
+  { label: 'Contact', href: '#contact', sectionId: 'contact' },
 ]
 
 export default function Navbar() {
@@ -16,6 +16,8 @@ export default function Navbar() {
   const [activeItem, setActiveItem] = useState('Home')
   const [scrollProgress, setScrollProgress] = useState(0)
   const navRef = useRef<HTMLDivElement>(null)
+  // Track if user just clicked a nav link (skip observer update briefly)
+  const clickedRef = useRef(false)
 
   const handleScroll = useCallback(() => {
     const y = window.scrollY
@@ -28,6 +30,42 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
+
+  // Scroll-spy: observe each section and update active nav item
+  useEffect(() => {
+    const sectionIds = navItems.map((item) => item.sectionId)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (clickedRef.current) return
+        // Find the entry that is most visible
+        let best: IntersectionObserverEntry | null = null
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            if (!best || entry.intersectionRatio > best.intersectionRatio) {
+              best = entry
+            }
+          }
+        }
+        if (best) {
+          const matched = navItems.find((item) => item.sectionId === best!.target.id)
+          if (matched) setActiveItem(matched.label)
+        }
+      },
+      {
+        // Trigger when a section covers the middle 40% of the viewport
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0,
+      }
+    )
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -60,7 +98,7 @@ export default function Navbar() {
           style={frameInlineStyle}
           className={`navbar-frame mx-auto flex max-w-[1280px] items-center justify-between gap-4 rounded-full px-7 border backdrop-blur-[20px] backdrop-saturate-[1.3] transition-all duration-[400ms] ease-smooth ${
             scrolled
-              ? 'navbar-frame-scrolled navbar-scrolled-glow h-[68px] bg-[rgba(8,8,8,0.92)] border-[rgba(247,209,90,0.25)] shadow-[0_8px_40px_rgba(0,0,0,0.5),0_0_60px_rgba(247,209,90,0.08),inset_0_1px_0_rgba(255,255,255,0.08)]'
+              ? 'navbar-frame-scrolled h-[68px] bg-[rgba(8,8,8,0.92)] border-[rgba(247,209,90,0.25)] shadow-[0_8px_40px_rgba(0,0,0,0.5),0_0_60px_rgba(247,209,90,0.08),inset_0_1px_0_rgba(255,255,255,0.08)]'
               : 'h-20 bg-[rgba(8,8,8,0.55)] border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.06)]'
           }`}
         >
@@ -101,7 +139,12 @@ export default function Navbar() {
                       ? 'text-gold navbar-link-underline--active'
                       : 'text-[rgba(244,241,232,0.7)] hover:text-gold hover:bg-[rgba(247,209,90,0.06)]'
                   }`}
-                  onClick={() => setActiveItem(item.label)}
+                  onClick={() => {
+                    setActiveItem(item.label)
+                    // Prevent observer from overriding the clicked selection briefly
+                    clickedRef.current = true
+                    setTimeout(() => { clickedRef.current = false }, 1000)
+                  }}
                 >
                   {item.label}
                   <span className="navbar-link-glow" aria-hidden="true" />
