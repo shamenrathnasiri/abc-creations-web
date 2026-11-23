@@ -1,10 +1,10 @@
-﻿import heroBg from '../assets/home/hero-bg.png'
+import heroBg from '../assets/home/hero-bg.png'
 
 export default function Home() {
 	return (
 		<section
 			id="home"
-			className="relative flex min-h-[calc(100vh-72px)] scroll mt-20 flex-col overflow-hidden"
+			className="relative flex min-h-[100svh] sm:min-h-[calc(100vh-72px)] scroll-mt-20 mt-16 sm:mt-20 flex-col overflow-hidden"
 		>
 			{/* ── Full-bleed background image ── */}
 			<div className="absolute inset-0">
@@ -15,7 +15,7 @@ export default function Home() {
 					aria-hidden="true"
 				/>
 				{/* Dark overlay — stronger on left for text legibility */}
-				<div className="absolute inset-0 bg-gradient-to-r from-[rgba(3,7,18,0.92)] via-[rgba(3,7,18,0.65)] to-[rgba(3,7,18,0.15)]" />
+				<div className="absolute inset-0 bg-gradient-to-r from-[rgba(3,7,18,0.95)] via-[rgba(3,7,18,0.75)] to-[rgba(3,7,18,0.25)] sm:from-[rgba(3,7,18,0.92)] sm:via-[rgba(3,7,18,0.65)] sm:to-[rgba(3,7,18,0.15)]" />
 				{/* Bottom dark fade so stats bar sits cleanly */}
 				<div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[rgba(3,7,18,0.85)] to-transparent" />
 			</div>
@@ -24,15 +24,15 @@ export default function Home() {
 			<div className="relative z-10 flex flex-1 flex-col justify-between">
 
 				{/* ─── Hero text + service pills ─── */}
-				<div className="flex flex-1 items-center px-6 py-10 sm:px-10 lg:px-16">
+				<div className="flex flex-1 items-center px-5 py-8 sm:px-10 lg:px-16">
 					<div className="w-full">
-						<div className="grid items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-6">
+						<div className="grid items-center gap-6 lg:grid-cols-[1fr_auto] lg:gap-6">
 
 							{/* LEFT: headline + CTAs */}
 							<div className="max-w-2xl">
 
 								{/* Eyebrow */}
-								<p className="mb-6 flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-[0.38em] text-white/70">
+								<p className="mb-4 sm:mb-6 flex items-center gap-1.5 sm:gap-2 text-[0.6rem] sm:text-[0.72rem] font-bold uppercase tracking-[0.2em] sm:tracking-[0.38em] text-white/70">
 									<span>Creative</span>
 									<span className="text-[#f57e22]">✕</span>
 									<span>Technology</span>
@@ -42,32 +42,32 @@ export default function Home() {
 
 								{/* Headline — large, clear, with shadow for readability */}
 								<h1
-											className="text-[clamp(2.6rem,5vw,4.8rem)] font-black uppercase leading-[0.92] tracking-[-0.02em] text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.7)] drop-shadow-[0_4px_36px_rgba(0,0,0,0.5)]"
-										>
-											Bold Ideas,{' '}
-											<span className="block bg-gradient-to-r from-[#f57e22] via-[#ffda00] to-[#ffda00] bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(245,126,34,0.5)]">
-												Beautifully
-											</span>
-											Made.
-										</h1>
+									className="text-[clamp(2rem,8vw,4.8rem)] font-black uppercase leading-[0.95] sm:leading-[0.92] tracking-[-0.02em] text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.7)] drop-shadow-[0_4px_36px_rgba(0,0,0,0.5)]"
+								>
+									Bold Ideas,{' '}
+									<span className="block bg-gradient-to-r from-[#f57e22] via-[#ffda00] to-[#ffda00] bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(245,126,34,0.5)]">
+										Beautifully
+									</span>
+									Made.
+								</h1>
 
-										<p className="mt-4 text-[0.8rem] font-bold uppercase tracking-[0.28em] text-[#f5d98a] md:text-[0.9rem]">
-											IDEAS TO MEET TECHNOLOGY.
-										</p>
+								<p className="mt-3 sm:mt-4 text-[0.65rem] sm:text-[0.8rem] font-bold uppercase tracking-[0.18em] sm:tracking-[0.28em] text-[#f5d98a] md:text-[0.9rem]">
+									IDEAS TO MEET TECHNOLOGY.
+								</p>
 								{/* Sub-text */}
 								<p
-									className="mt-7 max-w-lg text-[1rem] leading-[1.8] text-white/80"
+									className="mt-5 sm:mt-7 max-w-lg text-[0.88rem] sm:text-[1rem] leading-[1.65] sm:leading-[1.8] text-white/80"
 									style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}
 								>
 									We craft striking brand identities, premium visuals, and memorable creative experiences that give your business the attention it deserves.
 								</p>
 
 								{/* CTAs */}
-								<div className="mt-8 flex flex-wrap items-center gap-4">
+								<div className="mt-6 sm:mt-8 flex flex-col xs:flex-row flex-wrap items-stretch xs:items-center gap-3 sm:gap-4">
 									<a
 										href="#contact"
 										id="hero-cta-book"
-										className="inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-[#000000] shadow-lg transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
+										className="inline-flex items-center justify-center gap-2 sm:gap-2.5 rounded-full px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] text-[#000000] shadow-lg transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.97]"
 										style={{ background: 'linear-gradient(90deg,#f57e22,#ffda00)' }}
 									>
 										<svg className="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
@@ -78,7 +78,7 @@ export default function Home() {
 									<a
 										href="#portfolio"
 										id="hero-cta-work"
-										className="inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm transition-all duration-300 hover:border-[rgba(255,215,0,0.5)] hover:text-[#ffda00]"
+										className="inline-flex items-center justify-center gap-2 sm:gap-2.5 rounded-full border border-white/25 bg-white/10 px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] text-white backdrop-blur-sm transition-all duration-300 hover:border-[rgba(255,215,0,0.5)] hover:text-[#ffda00] active:scale-[0.97]"
 									>
 										<span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border border-white/40">
 											<svg className="h-2.5 w-2.5 translate-x-[1px]" viewBox="0 0 8 10" fill="currentColor">
@@ -90,15 +90,13 @@ export default function Home() {
 								</div>
 							</div>
 
-							
-							</div>
 						</div>
 					</div>
 				</div>
 
 				{/* ─── Bottom stats strip — sits OVER the image at the bottom ─── */}
 				<div
-					className="relative z-10 flex items-center justify-between gap-6 border-t px-6 py-4 sm:px-10 lg:px-16"
+					className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 border-t px-5 py-3 sm:px-10 sm:py-4 lg:px-16"
 					style={{
 						borderColor: 'rgba(255,255,255,0.08)',
 						background: 'rgba(3,7,18,0.60)',
@@ -106,11 +104,11 @@ export default function Home() {
 					}}
 				>
 					{/* Stats */}
-					<div className="flex flex-wrap items-center gap-6 sm:gap-10">
+					<div className="grid grid-cols-2 gap-x-4 gap-y-3 sm:flex sm:flex-wrap sm:items-center sm:gap-10 w-full sm:w-auto">
 						{[
 							{
 								icon: (
-									<svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+									<svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
 										<path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
 									</svg>
 								),
@@ -119,7 +117,7 @@ export default function Home() {
 							},
 							{
 								icon: (
-									<svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+									<svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
 										<path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
 									</svg>
 								),
@@ -128,7 +126,7 @@ export default function Home() {
 							},
 							{
 								icon: (
-									<svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+									<svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
 										<path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
 									</svg>
 								),
@@ -137,7 +135,7 @@ export default function Home() {
 							},
 							{
 								icon: (
-									<svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+									<svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
 										<path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
 									</svg>
 								),
@@ -145,16 +143,16 @@ export default function Home() {
 								sub: 'Approach',
 							},
 						].map((s) => (
-							<div key={s.title} className="flex items-center gap-2.5">
+							<div key={s.title} className="flex items-center gap-2 sm:gap-2.5">
 								<span
-									className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
+									className="flex h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 items-center justify-center rounded-full"
 									style={{ background: 'rgba(245,126,34,0.15)', color: '#f57e22' }}
 								>
 									{s.icon}
 								</span>
 								<div>
-									<p className="text-[0.78rem] font-bold text-white">{s.title}</p>
-									<p className="text-[0.65rem] text-white/50">{s.sub}</p>
+									<p className="text-[0.68rem] sm:text-[0.78rem] font-bold text-white">{s.title}</p>
+									<p className="text-[0.55rem] sm:text-[0.65rem] text-white/50">{s.sub}</p>
 								</div>
 							</div>
 						))}
@@ -179,6 +177,7 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
+			</div>
 		
 			{/* ── CSS ── */}
 			<style>{`

@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 /* ── DATA ── */
 const services = [
@@ -145,11 +145,11 @@ export default function Services() {
       {/* ── Background decorations ── */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div
-          className="absolute right-0 top-0 h-[600px] w-[600px] rounded-full"
+          className="absolute right-0 top-0 h-[400px] w-[400px] sm:h-[600px] sm:w-[600px] rounded-full"
           style={{ background: 'radial-gradient(circle, hsl(38 100% 59% / 0.06) 0%, transparent 65%)' }}
         />
         <div
-          className="absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full"
+          className="absolute bottom-0 left-0 h-[300px] w-[300px] sm:h-[400px] sm:w-[400px] rounded-full"
           style={{ background: 'radial-gradient(circle, hsl(28 84% 49% / 0.05) 0%, transparent 60%)' }}
         />
         <div
@@ -158,24 +158,24 @@ export default function Services() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-28 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-[1280px] px-5 py-16 sm:px-6 sm:py-28 lg:px-8">
 
         {/* ── Section Header ── */}
-        <div className="mb-16 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mb-10 sm:mb-16 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <span
-              className="mb-4 inline-flex items-center gap-3 text-[0.7rem] font-bold uppercase tracking-[0.35em]"
+              className="mb-3 sm:mb-4 inline-flex items-center gap-3 text-[0.65rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.25em] sm:tracking-[0.35em]"
               style={{ color: 'hsl(28 84% 49%)' }}
             >
               <span
-                className="inline-block h-[2px] w-6 rounded-full"
+                className="inline-block h-[2px] w-5 sm:w-6 rounded-full"
                 style={{ background: 'linear-gradient(90deg, hsl(28 84% 49%), hsl(38 100% 59%))' }}
               />
               What We Do
             </span>
             <h2
               className="font-black text-white leading-[1.1] tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 4.5vw, 3.2rem)' }}
+              style={{ fontSize: 'clamp(1.6rem, 5vw, 3.2rem)' }}
             >
               Every service you need,{' '}
               <span
@@ -197,31 +197,59 @@ export default function Services() {
 
         {/* ── Main Interactive Panel ── */}
         <div
-          className="overflow-hidden rounded-3xl"
+          className="overflow-hidden rounded-2xl sm:rounded-3xl"
           style={{ border: '1px solid rgba(255,255,255,0.05)' }}
         >
           <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr]">
 
-            {/* LEFT: Service list */}
+            {/* LEFT: Service list — horizontal scroll on mobile, vertical list on desktop */}
             <div
               className="flex flex-col"
               style={{ borderRight: '1px solid rgba(255,255,255,0.04)', background: '#060606' }}
             >
               {/* Header */}
               <div
-                className="px-6 py-4 flex items-center justify-between"
+                className="px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between"
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}
               >
-                <span className="text-[0.65rem] font-bold uppercase tracking-[0.35em]" style={{ color: 'rgba(255,255,255,0.2)' }}>
+                <span className="text-[0.6rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.35em]" style={{ color: 'rgba(255,255,255,0.2)' }}>
                   Services
                 </span>
-                <span className="text-[0.65rem] font-bold tabular-nums" style={{ color: 'rgba(255,255,255,0.15)' }}>
+                <span className="text-[0.6rem] sm:text-[0.65rem] font-bold tabular-nums" style={{ color: 'rgba(255,255,255,0.15)' }}>
                   {String(active + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}
                 </span>
               </div>
 
-              {/* Service rows */}
-              <div className="flex flex-col overflow-y-auto">
+              {/* Mobile: horizontal scroll strip */}
+              <div className="flex lg:hidden overflow-x-auto scrollbar-hide gap-2 px-3 py-3" style={{ WebkitOverflowScrolling: 'touch' }}>
+                {services.map((s, i) => {
+                  const isActive = i === active
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => setActive(i)}
+                      className="flex-shrink-0 flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-300 whitespace-nowrap"
+                      style={{
+                        background: isActive
+                          ? 'linear-gradient(90deg, hsl(28 84% 49% / 0.15), hsl(38 100% 59% / 0.08))'
+                          : 'rgba(255,255,255,0.03)',
+                        border: isActive
+                          ? '1px solid hsl(28 84% 49% / 0.3)'
+                          : '1px solid rgba(255,255,255,0.06)',
+                        color: isActive ? 'hsl(38 100% 59%)' : 'rgba(255,255,255,0.45)',
+                      }}
+                    >
+                      <div className="flex h-6 w-6 items-center justify-center rounded-lg" style={{ transform: 'scale(0.7)' }}>
+                        {s.icon}
+                      </div>
+                      {s.title}
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* Desktop: vertical list */}
+              <div className="hidden lg:flex flex-col overflow-y-auto">
                 {services.map((s, i) => {
                   const isActive = i === active
                   return (
@@ -302,7 +330,7 @@ export default function Services() {
             <div
               key={svc.id}
               className="relative overflow-hidden flex flex-col"
-              style={{ background: 'linear-gradient(135deg, #000000 0%, #000000 100%)', minHeight: 480 }}
+              style={{ background: 'linear-gradient(135deg, #000000 0%, #000000 100%)', minHeight: 'auto' }}
             >
               {/* Background glow for active card */}
               <div
@@ -318,13 +346,13 @@ export default function Services() {
                 style={{ background: 'linear-gradient(90deg, transparent, hsl(28 84% 49% / 0.4), transparent)' }}
               />
 
-              <div className="relative z-10 flex flex-1 flex-col justify-between p-8 md:p-12">
+              <div className="relative z-10 flex flex-1 flex-col justify-between p-5 sm:p-8 md:p-12">
                 {/* Top content */}
                 <div>
                   {/* Number + category */}
-                  <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center justify-between mb-5 sm:mb-8">
                     <span
-                      className="text-[0.65rem] font-bold uppercase tracking-[0.4em]"
+                      className="text-[0.6rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em]"
                       style={{ color: 'hsl(28 84% 49%)' }}
                     >
                       {svc.category === 'Design' ? 'Creative Design' : 'Technology'}
@@ -332,7 +360,7 @@ export default function Services() {
                     <span
                       className="font-black tabular-nums"
                       style={{
-                        fontSize: '5rem',
+                        fontSize: 'clamp(2.5rem, 8vw, 5rem)',
                         lineHeight: 1,
                         color: 'rgba(255,255,255,0.03)',
                         letterSpacing: '-0.04em',
@@ -344,35 +372,35 @@ export default function Services() {
 
                   {/* Icon */}
                   <div
-                    className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
+                    className="mb-4 sm:mb-6 flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-xl sm:rounded-2xl"
                     style={{
                       background: 'linear-gradient(135deg, hsl(28 84% 49% / 0.15), hsl(38 100% 59% / 0.08))',
                       border: '1px solid hsl(28 84% 49% / 0.25)',
                       color: 'hsl(38 100% 59%)',
                     }}
                   >
-                    <div style={{ transform: 'scale(1.5)' }}>{svc.icon}</div>
+                    <div style={{ transform: 'scale(1.2)' }} className="sm:[transform:scale(1.5)]">{svc.icon}</div>
                   </div>
 
                   {/* Title */}
                   <h3
-                    className="font-black text-white leading-tight tracking-tight mb-4"
-                    style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)' }}
+                    className="font-black text-white leading-tight tracking-tight mb-3 sm:mb-4"
+                    style={{ fontSize: 'clamp(1.3rem, 4vw, 2.2rem)' }}
                   >
                     {svc.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-base leading-[1.85] mb-8 max-w-lg" style={{ color: '#5a5855' }}>
+                  <p className="text-sm sm:text-base leading-[1.7] sm:leading-[1.85] mb-5 sm:mb-8 max-w-lg" style={{ color: '#5a5855' }}>
                     {svc.desc}
                   </p>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-10">
+                  <div className="flex flex-wrap gap-2 mb-6 sm:mb-10">
                     {svc.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs font-semibold px-3 py-1.5 rounded-full"
+                        className="text-[0.65rem] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full"
                         style={{
                           background: 'rgba(255,255,255,0.04)',
                           border: '1px solid rgba(255,255,255,0.08)',
@@ -386,12 +414,12 @@ export default function Services() {
                 </div>
 
                 {/* Bottom: navigation + CTA */}
-                <div className="flex items-center justify-between pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                <div className="flex items-center justify-between pt-4 sm:pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
                   {/* Prev / Next */}
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <button
                       onClick={() => setActive((active - 1 + services.length) % services.length)}
-                      className="flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
+                      className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
                       style={{
                         background: 'rgba(255,255,255,0.04)',
                         border: '1px solid rgba(255,255,255,0.08)',
@@ -405,7 +433,7 @@ export default function Services() {
                     </button>
                     <button
                       onClick={() => setActive((active + 1) % services.length)}
-                      className="flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
+                      className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
                       style={{
                         background: 'rgba(255,255,255,0.04)',
                         border: '1px solid rgba(255,255,255,0.08)',
@@ -422,7 +450,7 @@ export default function Services() {
                   {/* CTA */}
                   <a
                     href="#contact"
-                    className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                    className="inline-flex items-center gap-2 rounded-full px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
                     style={{
                       background: 'linear-gradient(135deg, hsl(28 84% 49%), hsl(38 100% 59%))',
                       boxShadow: '0 4px 20px hsl(28 84% 49% / 0.3)',
@@ -441,7 +469,7 @@ export default function Services() {
         </div>
 
         {/* ── Bottom strip: key capabilities ── */}
-        <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="mt-4 sm:mt-6 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
           {[
             { label: 'Graphic Design', pct: 95 },
             { label: 'Web Development', pct: 90 },
@@ -450,13 +478,13 @@ export default function Services() {
           ].map((item, i) => (
             <div
               key={item.label}
-              className="rounded-2xl px-5 py-4"
+              className="rounded-xl sm:rounded-2xl px-3 sm:px-5 py-3 sm:py-4"
               style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}
             >
-              <div className="flex items-end justify-between mb-3">
-                <span className="text-xs font-semibold text-white/50">{item.label}</span>
+              <div className="flex items-end justify-between mb-2 sm:mb-3">
+                <span className="text-[0.6rem] sm:text-xs font-semibold text-white/50">{item.label}</span>
                 <span
-                  className="text-xs font-black tabular-nums"
+                  className="text-[0.6rem] sm:text-xs font-black tabular-nums"
                   style={{
                     background: 'linear-gradient(135deg, hsl(28 84% 49%), hsl(38 100% 59%))',
                     WebkitBackgroundClip: 'text',

@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0)
@@ -89,28 +89,25 @@ export default function About() {
     >
       {/* ── Decorative background elements ── */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        {/* Large radial glow top-right */}
         <div
-          className="absolute -right-32 top-0 h-[700px] w-[700px] rounded-full"
+          className="absolute -right-16 sm:-right-32 top-0 h-[400px] w-[400px] sm:h-[700px] sm:w-[700px] rounded-full"
           style={{ background: 'radial-gradient(circle, hsl(28 84% 49% / 0.07) 0%, transparent 65%)' }}
         />
-        {/* Subtle glow bottom-left */}
         <div
-          className="absolute -bottom-24 -left-24 h-[500px] w-[500px] rounded-full"
+          className="absolute -bottom-12 sm:-bottom-24 -left-12 sm:-left-24 h-[300px] w-[300px] sm:h-[500px] sm:w-[500px] rounded-full"
           style={{ background: 'radial-gradient(circle, hsl(38 100% 59% / 0.05) 0%, transparent 60%)' }}
         />
-        {/* Horizontal rule accent */}
         <div
           className="absolute top-0 left-0 right-0 h-[1px]"
           style={{ background: 'linear-gradient(90deg, transparent, hsl(28 84% 49% / 0.3), transparent)' }}
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-28 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-[1280px] px-5 py-16 sm:py-28 lg:px-8">
 
         {/* ── TOP: Label + Hero headline ── */}
         <div
-          className="mb-20 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20 lg:items-end"
+          className="mb-12 sm:mb-20 grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20 lg:items-end"
         >
           {/* Left: headline */}
           <div
@@ -118,11 +115,11 @@ export default function About() {
             style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(32px)' }}
           >
             <span
-              className="mb-5 inline-flex items-center gap-3 text-[0.7rem] font-bold uppercase tracking-[0.35em]"
+              className="mb-4 sm:mb-5 inline-flex items-center gap-2 sm:gap-3 text-[0.6rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.25em] sm:tracking-[0.35em]"
               style={{ color: 'hsl(28 84% 49%)' }}
             >
               <span
-                className="inline-block h-[2px] w-6 rounded-full"
+                className="inline-block h-[2px] w-5 sm:w-6 rounded-full"
                 style={{ background: 'linear-gradient(90deg, hsl(28 84% 49%), hsl(38 100% 59%))' }}
               />
               Who We Are
@@ -130,7 +127,7 @@ export default function About() {
 
             <h2
               className="font-black text-white leading-[1.1] tracking-tight"
-              style={{ fontSize: 'clamp(2.2rem, 5vw, 3.6rem)' }}
+              style={{ fontSize: 'clamp(1.8rem, 5vw, 3.6rem)' }}
             >
               We design{' '}
               <span
@@ -155,12 +152,12 @@ export default function About() {
             className="transition-all duration-700 delay-150"
             style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(32px)' }}
           >
-            <p className="text-base leading-[1.9] mb-6" style={{ color: '#6b6864' }}>
+            <p className="text-sm sm:text-base leading-[1.75] sm:leading-[1.9] mb-4 sm:mb-6" style={{ color: '#6b6864' }}>
               ABC Graphics is a creative studio based in Sri Lanka, specialising in graphic design,
               web development, and digital branding. We partner with businesses — from startups to
               established brands — to craft visual identities and digital experiences that truly stand out.
             </p>
-            <p className="text-base leading-[1.9]" style={{ color: '#6b6864' }}>
+            <p className="text-sm sm:text-base leading-[1.75] sm:leading-[1.9]" style={{ color: '#6b6864' }}>
               Every project we take on is treated with the same care and dedication, regardless of size.
               We believe great design isn't a luxury — it's what separates forgettable brands from
               unforgettable ones.
@@ -170,20 +167,20 @@ export default function About() {
 
         {/* ── STATS ROW ── */}
         <div
-          className="mb-20 grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-2xl"
+          className="mb-12 sm:mb-20 grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-xl sm:rounded-2xl"
           style={{ border: '1px solid rgba(255,255,255,0.04)', background: 'rgba(255,255,255,0.04)' }}
         >
           {stats.map((stat, i) => (
             <div
               key={stat.label}
-              className="flex flex-col items-center justify-center gap-2 px-6 py-8 group transition-all duration-500"
+              className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-5 sm:py-8 group transition-all duration-500"
               style={{
                 background: '#080808',
                 transitionDelay: `${i * 80}ms`,
               }}
             >
               <div
-                className="text-4xl md:text-5xl font-black tabular-nums"
+                className="text-3xl sm:text-4xl md:text-5xl font-black tabular-nums"
                 style={{
                   background: 'linear-gradient(135deg, hsl(28 84% 49%), hsl(38 100% 59%))',
                   WebkitBackgroundClip: 'text',
@@ -193,7 +190,7 @@ export default function About() {
               >
                 <CountUp target={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-center" style={{ color: '#5a5855' }}>
+              <p className="text-[0.6rem] sm:text-xs font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-center" style={{ color: '#5a5855' }}>
                 {stat.label}
               </p>
             </div>
@@ -206,18 +203,18 @@ export default function About() {
           style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(24px)' }}
         >
           <p
-            className="text-[0.7rem] font-bold uppercase tracking-[0.35em] mb-8"
+            className="text-[0.65rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.25em] sm:tracking-[0.35em] mb-6 sm:mb-8"
             style={{ color: 'hsl(28 84% 49%)' }}
           >
             Our Principles
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
           {pillars.map((pillar, i) => (
             <div
               key={pillar.number}
-              className="group relative overflow-hidden rounded-2xl p-8 cursor-default transition-all duration-500 hover:-translate-y-1"
+              className="group relative overflow-hidden rounded-xl sm:rounded-2xl p-6 sm:p-8 cursor-default transition-all duration-500 hover:-translate-y-1"
               style={{
                 background: 'rgba(255,255,255,0.02)',
                 border: '1px solid rgba(255,255,255,0.05)',
@@ -235,13 +232,13 @@ export default function About() {
 
               {/* Top accent line */}
               <div
-                className="absolute top-0 left-8 right-8 h-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute top-0 left-6 right-6 sm:left-8 sm:right-8 h-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{ background: `linear-gradient(90deg, transparent, ${pillar.accent}, transparent)` }}
               />
 
               {/* Number */}
               <span
-                className="block text-5xl font-black mb-6 leading-none select-none"
+                className="block text-4xl sm:text-5xl font-black mb-4 sm:mb-6 leading-none select-none"
                 style={{
                   color: `${pillar.accent}18`,
                   fontVariantNumeric: 'tabular-nums',
@@ -253,14 +250,14 @@ export default function About() {
 
               {/* Divider */}
               <div
-                className="mb-5 h-[2px] w-8 rounded-full transition-all duration-500 group-hover:w-14"
+                className="mb-4 sm:mb-5 h-[2px] w-7 sm:w-8 rounded-full transition-all duration-500 group-hover:w-12 sm:group-hover:w-14"
                 style={{ background: `linear-gradient(90deg, ${pillar.accent}, hsl(38 100% 59%))` }}
               />
 
-              <h3 className="text-lg font-bold text-white mb-3 tracking-tight">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-2 sm:mb-3 tracking-tight">
                 {pillar.title}
               </h3>
-              <p className="text-sm leading-[1.85]" style={{ color: '#65625f' }}>
+              <p className="text-xs sm:text-sm leading-[1.75] sm:leading-[1.85]" style={{ color: '#65625f' }}>
                 {pillar.body}
               </p>
             </div>

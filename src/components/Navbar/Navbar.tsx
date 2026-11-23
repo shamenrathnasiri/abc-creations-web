@@ -16,13 +16,11 @@ export default function Navbar() {
   const [activeItem, setActiveItem] = useState('Home')
   const [scrollProgress, setScrollProgress] = useState(0)
   const navRef = useRef<HTMLDivElement>(null)
-  // Track if user just clicked a nav link (skip observer update briefly)
   const clickedRef = useRef(false)
 
   const handleScroll = useCallback(() => {
     const y = window.scrollY
     setScrolled(y > 32)
-    // Smooth 0-1 progress over first 300px of scroll
     setScrollProgress(Math.min(y / 300, 1))
   }, [])
 
@@ -31,14 +29,12 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
-  // Scroll-spy: observe each section and update active nav item
   useEffect(() => {
     const sectionIds = navItems.map((item) => item.sectionId)
 
     const observer = new IntersectionObserver(
       (entries) => {
         if (clickedRef.current) return
-        // Find the entry that is most visible
         let best: IntersectionObserverEntry | null = null
         for (const entry of entries) {
           if (entry.isIntersecting) {
@@ -53,7 +49,6 @@ export default function Navbar() {
         }
       },
       {
-        // Trigger when a section covers the middle 40% of the viewport
         rootMargin: '-20% 0px -60% 0px',
         threshold: 0,
       }
@@ -67,13 +62,11 @@ export default function Navbar() {
     return () => observer.disconnect()
   }, [])
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
-  // Dynamic inline styles driven by scroll progress
   const frameInlineStyle = scrolled
     ? {
         '--scroll-progress': scrollProgress,
@@ -89,38 +82,38 @@ export default function Navbar() {
     <>
       <nav
         id="main-navbar"
-        className={`fixed top-0 left-0 right-0 z-[1000] px-6 transition-all duration-[400ms] ease-smooth ${
-          scrolled ? 'pt-2' : 'pt-4'
+        className={`fixed top-0 left-0 right-0 z-[1000] px-3 sm:px-6 transition-all duration-[400ms] ease-smooth ${
+          scrolled ? 'pt-1.5 sm:pt-2' : 'pt-2.5 sm:pt-4'
         }`}
       >
         <div
           ref={navRef}
           style={frameInlineStyle}
-          className={`navbar-frame mx-auto flex max-w-[1280px] items-center justify-between gap-4 rounded-full px-7 border backdrop-blur-[20px] backdrop-saturate-[1.3] transition-all duration-[400ms] ease-smooth ${
+          className={`navbar-frame mx-auto flex max-w-[1280px] items-center justify-between gap-2 sm:gap-4 rounded-full px-4 sm:px-7 border backdrop-blur-[20px] backdrop-saturate-[1.3] transition-all duration-[400ms] ease-smooth ${
             scrolled
-              ? 'navbar-frame-scrolled h-[68px] bg-[rgba(8,8,8,0.92)] border-[rgba(247,209,90,0.25)] shadow-[0_8px_40px_rgba(0,0,0,0.5),0_0_60px_rgba(247,209,90,0.08),inset_0_1px_0_rgba(255,255,255,0.08)]'
-              : 'h-20 bg-[rgba(8,8,8,0.55)] border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.06)]'
+              ? 'navbar-frame-scrolled h-[60px] sm:h-[68px] bg-[rgba(8,8,8,0.92)] border-[rgba(247,209,90,0.25)] shadow-[0_8px_40px_rgba(0,0,0,0.5),0_0_60px_rgba(247,209,90,0.08),inset_0_1px_0_rgba(255,255,255,0.08)]'
+              : 'h-16 sm:h-20 bg-[rgba(8,8,8,0.55)] border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.06)]'
           }`}
         >
           {/* ── Logo ── */}
           <a
             href="#"
-            className="flex shrink-0 items-center gap-3 no-underline transition-transform duration-300 ease-in-out hover:scale-[1.04]"
+            className="flex shrink-0 items-center gap-2 sm:gap-3 no-underline transition-transform duration-300 ease-in-out hover:scale-[1.04]"
             id="navbar-logo"
             aria-label="ABC Creations Home"
           >
             <img
               src={logoSrc}
               alt="ABC Creations logo"
-              className={`h-20 w-20 object-contain drop-shadow-[0_0_12px_rgba(247,209,90,0.3)] hover:drop-shadow-[0_0_18px_rgba(247,209,90,0.55)] transition-[filter] duration-300 ${scrolled ? 'navbar-logo-scrolled' : ''}`}
+              className={`h-14 w-14 sm:h-20 sm:w-20 object-contain drop-shadow-[0_0_12px_rgba(247,209,90,0.3)] hover:drop-shadow-[0_0_18px_rgba(247,209,90,0.55)] transition-[filter] duration-300 ${scrolled ? 'navbar-logo-scrolled' : ''}`}
               width={80}
               height={80}
             />
             <span className="flex flex-col leading-tight">
-              <span className="text-xl font-black tracking-[0.08em] bg-gradient-to-br from-orange-500 via-amber-400 to-yellow-300 bg-clip-text text-transparent">
+              <span className="text-base sm:text-xl font-black tracking-[0.06em] sm:tracking-[0.08em] bg-gradient-to-br from-orange-500 via-amber-400 to-yellow-300 bg-clip-text text-transparent">
                 ABC CREATIONS
               </span>
-              <span className="text-[0.6rem] font-semibold tracking-[0.32em] uppercase text-[rgba(244,241,232,0.55)]">
+              <span className="text-[0.5rem] sm:text-[0.6rem] font-semibold tracking-[0.2em] sm:tracking-[0.32em] uppercase text-[rgba(244,241,232,0.55)]">
                 Creative Solutions
               </span>
             </span>
@@ -141,7 +134,6 @@ export default function Navbar() {
                   }`}
                   onClick={() => {
                     setActiveItem(item.label)
-                    // Prevent observer from overriding the clicked selection briefly
                     clickedRef.current = true
                     setTimeout(() => { clickedRef.current = false }, 1000)
                   }}
@@ -165,7 +157,7 @@ export default function Navbar() {
 
           {/* ── Mobile hamburger ── */}
           <button
-            className={`burger-line-parent flex lg:hidden flex-col justify-center items-center gap-[5px] w-11 h-11 p-0 border border-white/10 rounded-xl bg-white/[0.04] cursor-pointer shrink-0 transition-colors duration-300 hover:bg-[rgba(247,209,90,0.08)] hover:border-[rgba(247,209,90,0.2)] ${
+            className={`burger-line-parent flex lg:hidden flex-col justify-center items-center gap-[5px] w-10 h-10 sm:w-11 sm:h-11 p-0 border border-white/10 rounded-xl bg-white/[0.04] cursor-pointer shrink-0 transition-colors duration-300 hover:bg-[rgba(247,209,90,0.08)] hover:border-[rgba(247,209,90,0.2)] ${
               mobileOpen ? 'burger-open' : ''
             }`}
             id="navbar-burger"
@@ -200,31 +192,31 @@ export default function Navbar() {
 
         {/* Panel */}
         <div
-          className={`mobile-panel absolute top-0 right-0 w-[min(380px,85vw)] h-full flex flex-col p-8 px-7 bg-gradient-to-b from-[rgba(12,12,12,0.97)] to-[rgba(8,8,8,0.99)] border-l border-[rgba(247,209,90,0.1)] shadow-[-10px_0_60px_rgba(0,0,0,0.5)] ${
+          className={`mobile-panel absolute top-0 right-0 w-[min(340px,88vw)] h-full flex flex-col p-6 sm:p-8 px-5 sm:px-7 bg-gradient-to-b from-[rgba(12,12,12,0.97)] to-[rgba(8,8,8,0.99)] border-l border-[rgba(247,209,90,0.1)] shadow-[-10px_0_60px_rgba(0,0,0,0.5)] ${
             mobileOpen ? 'mobile-panel-open' : ''
           }`}
         >
           {/* Mobile logo */}
-          <div className="flex items-center gap-3.5 mb-12 pb-7 border-b border-white/[0.06]">
+          <div className="flex items-center gap-3 mb-8 sm:mb-12 pb-5 sm:pb-7 border-b border-white/[0.06]">
             <img
               src={logoSrc}
               alt="ABC Creations"
-              className="w-32 h-32 object-contain drop-shadow-[0_0_12px_rgba(247,209,90,0.3)]"
+              className="w-20 h-20 sm:w-32 sm:h-32 object-contain drop-shadow-[0_0_12px_rgba(247,209,90,0.3)]"
               width={128}
               height={128}
             />
             <span className="flex flex-col leading-tight">
-              <span className="text-xl font-black tracking-[0.08em] bg-gradient-to-br from-orange-500 via-amber-400 to-yellow-300 bg-clip-text text-transparent">
+              <span className="text-lg sm:text-xl font-black tracking-[0.06em] sm:tracking-[0.08em] bg-gradient-to-br from-orange-500 via-amber-400 to-yellow-300 bg-clip-text text-transparent">
                 ABC CREATIONS
-         </span>
-              <span className="text-[0.6rem] font-semibold tracking-[0.32em] uppercase text-[rgba(244,241,232,0.55)]">
+              </span>
+              <span className="text-[0.5rem] sm:text-[0.6rem] font-semibold tracking-[0.25em] sm:tracking-[0.32em] uppercase text-[rgba(244,241,232,0.55)]">
                 Creative Solutions
               </span>
             </span>
           </div>
 
           {/* Mobile links */}
-          <ul className={`list-none m-0 p-0 flex flex-col gap-1.5 flex-1 ${mobileOpen ? 'mobile-links-open' : ''}`}>
+          <ul className={`list-none m-0 p-0 flex flex-col gap-1 sm:gap-1.5 flex-1 ${mobileOpen ? 'mobile-links-open' : ''}`}>
             {navItems.map((item, i) => (
               <li
                 key={item.label}
@@ -234,7 +226,7 @@ export default function Navbar() {
                 <a
                   href={item.href}
                   id={`mobile-nav-${item.label.toLowerCase()}`}
-                  className={`flex items-center gap-4 whitespace-nowrap px-[18px] py-3.5 text-base font-semibold tracking-[0.1em] uppercase no-underline rounded-2xl transition-colors duration-300 ${
+                  className={`flex items-center gap-3 sm:gap-4 whitespace-nowrap px-3 sm:px-[18px] py-3 sm:py-3.5 text-sm sm:text-base font-semibold tracking-[0.08em] sm:tracking-[0.1em] uppercase no-underline rounded-xl sm:rounded-2xl transition-colors duration-300 ${
                     activeItem === item.label
                       ? 'text-gold bg-[rgba(247,209,90,0.06)]'
                       : 'text-[rgba(244,241,232,0.65)] hover:text-gold hover:bg-[rgba(247,209,90,0.06)]'
@@ -244,7 +236,7 @@ export default function Navbar() {
                     setMobileOpen(false)
                   }}
                 >
-                  <span className="text-[0.7rem] font-normal tracking-normal text-[rgba(247,209,90,0.35)] tabular-nums">
+                  <span className="text-[0.6rem] sm:text-[0.7rem] font-normal tracking-normal text-[rgba(247,209,90,0.35)] tabular-nums">
                     0{i + 1}
                   </span>
                   {item.label}
@@ -256,7 +248,7 @@ export default function Navbar() {
           {/* Mobile CTA */}
           <a
             href="#contact"
-            className="flex items-center justify-center p-4 mt-auto text-[0.85rem] font-bold tracking-[0.14em] uppercase text-brand-surface no-underline rounded-[18px] bg-gradient-to-br from-gold-light via-gold to-gold-dark transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(247,209,90,0.3)]"
+            className="flex items-center justify-center p-3.5 sm:p-4 mt-auto text-[0.8rem] sm:text-[0.85rem] font-bold tracking-[0.12em] sm:tracking-[0.14em] uppercase text-brand-surface no-underline rounded-2xl sm:rounded-[18px] bg-gradient-to-br from-gold-light via-gold to-gold-dark transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(247,209,90,0.3)] active:scale-[0.97]"
             id="mobile-navbar-cta"
             onClick={() => setMobileOpen(false)}
           >

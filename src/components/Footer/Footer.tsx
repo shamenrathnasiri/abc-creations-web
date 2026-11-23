@@ -1,4 +1,4 @@
-﻿import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.png";
 import {
   Mail,
   MessageCircle,
@@ -140,9 +140,9 @@ const Footer = () => {
     <footer className="relative overflow-hidden" style={{ background: "#000000" }}>
       {/* ─── Pre-Footer CTA Box ─── */}
       <div className="relative z-10">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8">
           <div
-            className="relative -mb-1 rounded-t-[2rem] px-8 py-10 md:px-14 md:py-14 overflow-hidden"
+            className="relative -mb-1 rounded-t-[1.5rem] sm:rounded-t-[2rem] px-5 py-8 sm:px-8 sm:py-10 md:px-14 md:py-14 overflow-hidden"
             style={{
               background: "linear-gradient(135deg, hsl(28 84% 49%), hsl(38 100% 59%))",
             }}
@@ -157,28 +157,28 @@ const Footer = () => {
               }}
             />
 
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-8">
               <div className="text-center md:text-left">
                 <h3
-                  className="text-2xl md:text-3xl font-bold text-white mb-3"
+                  className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3"
                   style={{ fontFamily: "'Georgia', serif" }}
                 >
                   Experience The ABC Graphics Advantage.
                 </h3>
-                <p className="text-white/80 text-sm md:text-base max-w-lg">
+                <p className="text-white/80 text-xs sm:text-sm md:text-base max-w-lg">
                   Maximize your brand impact with ABC Graphics - where creativity
                   meets excellence for unmatched design results.
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-4 md:gap-6">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4 md:gap-6">
                 {[
                   "Premium Designs and Developments",
                   "Expert Team",
                   "100% Satisfaction",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-white text-sm font-medium">
-                    <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                  <div key={item} className="flex items-center gap-1.5 sm:gap-2 text-white text-xs sm:text-sm font-medium">
+                    <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -207,9 +207,9 @@ const Footer = () => {
           />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8 relative z-10">
           {/* Top section: CTA + Link columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8 mb-10 sm:mb-16">
             {/* Left: Big CTA text */}
             <div className="lg:col-span-5">
               <span
@@ -219,15 +219,15 @@ const Footer = () => {
                 Hello! We're Listening
               </span>
               <h2
-                className="text-3xl md:text-4xl font-bold text-white mb-2 leading-tight"
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 leading-tight"
                 style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}
               >
                 Let's talk about
               </h2>
               {/* Animated rotating text */}
-              <div className="mb-6 h-[3rem] md:h-[3.5rem] overflow-hidden relative">
+              <div className="mb-4 sm:mb-6 h-[2.5rem] sm:h-[3rem] md:h-[3.5rem] overflow-hidden relative">
                 <span
-                  className="text-3xl md:text-4xl font-bold inline-block transition-all duration-500 ease-in-out"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold inline-block transition-all duration-500 ease-in-out"
                   style={{
                     fontFamily: "'Inter', sans-serif",
                     letterSpacing: "-0.02em",
@@ -255,7 +255,7 @@ const Footer = () => {
             </div>
 
             {/* Right: Three nav columns */}
-            <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 lg:gap-6 lg:pl-8">
+            <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-6 lg:pl-8">
               {/* Services */}
               <div>
                 <h4 className="font-bold text-white text-sm uppercase tracking-wider mb-5 flex items-center gap-2">
@@ -353,29 +353,29 @@ const Footer = () => {
           </div>
 
           {/* Contact cards row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-8 sm:mb-12">
             {contacts.map(({ label, value, href, icon: Icon, external }) => (
               <a
                 key={label}
                 href={href}
-                className="flex items-center gap-3 rounded-xl border border-white/[0.05] px-4 py-3 text-white/60 transition-all duration-300 hover:border-primary/20 hover:bg-white/[0.03] group"
+                className="flex items-center gap-2.5 sm:gap-3 rounded-lg sm:rounded-xl border border-white/[0.05] px-3 sm:px-4 py-2.5 sm:py-3 text-white/60 transition-all duration-300 hover:border-primary/20 hover:bg-white/[0.03] group"
                 target={external ? "_blank" : undefined}
                 rel={external ? "noreferrer" : undefined}
               >
                 <span
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-white shadow-sm transition-all duration-300 group-hover:shadow-lg flex-shrink-0"
+                  className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg text-white shadow-sm transition-all duration-300 group-hover:shadow-lg flex-shrink-0"
                   style={{
                     background: "linear-gradient(135deg, hsl(28 84% 49%), hsl(38 100% 59%))",
                     boxShadow: "0 4px 12px hsl(28 84% 49% / 0.25)",
                   }}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 </span>
-                <span>
-                  <span className="block text-[10px] uppercase tracking-wider text-white/30">
+                <span className="min-w-0">
+                  <span className="block text-[9px] sm:text-[10px] uppercase tracking-wider text-white/30">
                     {label}
                   </span>
-                  <span className="font-medium text-white/70 group-hover:text-white transition-colors duration-300 text-xs">
+                  <span className="font-medium text-white/70 group-hover:text-white transition-colors duration-300 text-[0.65rem] sm:text-xs break-all sm:break-normal">
                     {value}
                   </span>
                 </span>
@@ -387,7 +387,7 @@ const Footer = () => {
           <div className="section-divider mx-auto" />
 
           {/* Bottom bar */}
-          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="pt-4 sm:pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
             {/* Left: Logo + copyright */}
             <div className="flex items-center gap-3">
               <img
