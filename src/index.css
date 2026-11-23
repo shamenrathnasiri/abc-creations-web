@@ -3,6 +3,50 @@
 @tailwind utilities;
 
 /* ══════════════════════════════════════════════════════
+   GLOBAL MOBILE RESPONSIVENESS
+   ══════════════════════════════════════════════════════ */
+
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent horizontal overflow on mobile */
+html, body {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 640px) {
+  button, a, [role="tab"], [role="menuitem"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better tap highlight */
+  * {
+    -webkit-tap-highlight-color: rgba(245, 126, 34, 0.1);
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  #main-navbar {
+    padding-top: max(env(safe-area-inset-top), 0px);
+  }
+}
+
+/* ══════════════════════════════════════════════════════
    LOGO BRAND GRADIENT — extracted from the AC logo mark
    Orange  #f57e22  →  Gold  #ffda00  →  Cream  #ffda00
    ══════════════════════════════════════════════════════ */
